@@ -69,7 +69,7 @@ const STYLE: Record<string, SceneStyle> = {
 interface CastMember { arch: string; char: string; x: number; z: number; s: number }
 // Cast placed near each scene's story heart; they turn to face the arriving camera.
 const CAST: Record<string, CastMember[]> = {
-  'adi-01-naimisha': [{ arch: 'sage', char: 'Sauti', x: -1.5, z: 4, s: 1 }, { arch: 'sage', char: 'Shaunaka', x: 1.8, z: 4.5, s: 0.95 }],
+  'adi-01-naimisha': [{ arch: 'sage', char: 'Sauti', x: -4, z: 6.5, s: 1 }, { arch: 'sage', char: 'Shaunaka', x: 4, z: 7, s: 0.95 }],
   'adi-02-snake-sacrifice': [{ arch: 'king', char: 'Janamejaya', x: -2.5, z: 5.5, s: 1.05 }, { arch: 'sage', char: 'Astika', x: 2.5, z: 6, s: 1 }],
   'adi-03-ganga': [{ arch: 'king', char: 'Shantanu', x: 3, z: 10, s: 1 }, { arch: 'princess', char: 'Ganga', x: 8.5, z: 11, s: 1 }],
   'adi-04-bhishma-vow': [{ arch: 'warrior', char: 'Bhishma', x: -2, z: 10, s: 1.15 }, { arch: 'king', char: 'Shantanu', x: 2.5, z: 10.5, s: 1 }],
@@ -128,11 +128,13 @@ function toonify(root: THREE.Object3D) {
     const mesh = o as THREE.Mesh;
     if (!mesh.isMesh) return;
     const old = mesh.material as THREE.MeshStandardMaterial | THREE.MeshStandardMaterial[];
-    const mats = Array.isArray(old) ? old : [old];
-    mesh.material = mats.map((m) => new THREE.MeshToonMaterial({
-      color: (m as THREE.MeshStandardMaterial).color ?? new THREE.Color(0xffffff),
+    const first = Array.isArray(old) ? old[0] : old;
+    const c = (first as THREE.MeshStandardMaterial)?.color ?? new THREE.Color(0xffffff);
+    mesh.material = new THREE.MeshToonMaterial({
+      color: c.clone(),
+      emissive: c.clone().multiplyScalar(0.38),
       gradientMap,
-    })) as unknown as THREE.Material;
+    });
   });
 }
 
