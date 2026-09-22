@@ -77,7 +77,7 @@ const CAST: Record<string, CastMember[]> = {
   'adi-06-births': [{ arch: 'princess', char: 'Kunti', x: -6, z: -10, s: 1 }, { arch: 'sage', char: 'Durvasa', x: -2.5, z: -9, s: 1 }],
   'adi-07-drona': [{ arch: 'sage', char: 'Drona', x: 3, z: 6, s: 1.05 }, { arch: 'warrior', char: 'Arjuna', x: -1, z: 7, s: 1 }],
   'adi-08-lakshagriha': [{ arch: 'warrior', char: 'Yudhishthira', x: -2, z: 2, s: 0.95 }, { arch: 'sage', char: 'Vidura', x: 2, z: 2.5, s: 1 }],
-  'adi-09-hidimba': [{ arch: 'warrior', char: 'Bhima', x: -2, z: 4, s: 1.25 }, { arch: 'princess', char: 'Hidimbi', x: 2, z: 4.5, s: 1 }],
+  'adi-09-hidimba': [{ arch: 'strongman', char: 'Bhima', x: -2, z: 4, s: 1.25 }, { arch: 'princess', char: 'Hidimbi', x: 2, z: 4.5, s: 1 }],
   'adi-10-swayamvara': [{ arch: 'princess', char: 'Draupadi', x: 0, z: 0, s: 1.05 }, { arch: 'warrior', char: 'Arjuna', x: 3.5, z: 0.5, s: 1 }],
   'adi-11-division': [{ arch: 'king', char: 'Dhritarashtra', x: -3, z: 0, s: 1.1 }, { arch: 'warrior', char: 'Yudhishthira', x: 3, z: 0.5, s: 1 }],
   'adi-12-indraprastha': [{ arch: 'warrior', char: 'Krishna', x: 0, z: 4, s: 1 }, { arch: 'warrior', char: 'Arjuna', x: 3, z: 4.5, s: 0.95 }],

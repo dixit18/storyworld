@@ -608,8 +608,8 @@
       "assetId": "char-sage",
       "type": "model",
       "path": "assets/models/characters/sage.glb",
-      "source": "blender-chars-v1",
-      "version": "0.4.0",
+      "source": "blender-chars-v2",
+      "version": "0.5.0",
       "optimizationStatus": "optimized",
       "tags": [
         "sage",
@@ -627,8 +627,8 @@
       "assetId": "char-warrior",
       "type": "model",
       "path": "assets/models/characters/warrior.glb",
-      "source": "blender-chars-v1",
-      "version": "0.4.0",
+      "source": "blender-chars-v2",
+      "version": "0.5.0",
       "optimizationStatus": "optimized",
       "tags": [
         "warrior",
@@ -646,8 +646,8 @@
       "assetId": "char-princess",
       "type": "model",
       "path": "assets/models/characters/princess.glb",
-      "source": "blender-chars-v1",
-      "version": "0.4.0",
+      "source": "blender-chars-v2",
+      "version": "0.5.0",
       "optimizationStatus": "optimized",
       "tags": [
         "princess",
@@ -665,8 +665,8 @@
       "assetId": "char-king",
       "type": "model",
       "path": "assets/models/characters/king.glb",
-      "source": "blender-chars-v1",
-      "version": "0.4.0",
+      "source": "blender-chars-v2",
+      "version": "0.5.0",
       "optimizationStatus": "optimized",
       "tags": [
         "king",
@@ -676,6 +676,21 @@
         "glb",
         "draco",
         "toon"
+      ]
+    },
+    {
+      "assetId": "char-strongman",
+      "type": "model",
+      "path": "assets/models/characters/strongman.glb",
+      "source": "blender-chars-v2",
+      "version": "0.5.0",
+      "optimizationStatus": "optimized",
+      "tags": [
+        "glb",
+        "draco",
+        "toon",
+        "strongman",
+        "Bhima"
       ]
     }
   ]

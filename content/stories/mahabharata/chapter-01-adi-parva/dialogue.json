@@ -2,76 +2,236 @@
   "storyId": "mahabharata",
   "chapterId": "chapter-01-adi-parva",
   "voices": {
-    "Sauti": {"pitch": 1.1, "rate": 1.0},
-    "Shaunaka": {"pitch": 0.8, "rate": 0.95},
-    "Janamejaya": {"pitch": 0.9, "rate": 1.05},
-    "Astika": {"pitch": 0.7, "rate": 0.9},
-    "Shantanu": {"pitch": 0.75, "rate": 0.9},
-    "Ganga": {"pitch": 1.25, "rate": 0.95},
-    "Bhishma": {"pitch": 0.65, "rate": 0.85},
-    "Vyasa": {"pitch": 0.7, "rate": 0.9},
-    "Satyavati": {"pitch": 1.2, "rate": 0.95},
-    "Kunti": {"pitch": 1.25, "rate": 0.95},
-    "Durvasa": {"pitch": 0.7, "rate": 0.9},
-    "Drona": {"pitch": 0.8, "rate": 0.95},
-    "Arjuna": {"pitch": 1.0, "rate": 1.0},
-    "Yudhishthira": {"pitch": 0.85, "rate": 0.9},
-    "Vidura": {"pitch": 0.75, "rate": 0.9},
-    "Bhima": {"pitch": 0.6, "rate": 1.0},
-    "Hidimbi": {"pitch": 1.3, "rate": 0.95},
-    "Draupadi": {"pitch": 1.3, "rate": 1.0},
-    "Dhritarashtra": {"pitch": 0.7, "rate": 0.85},
-    "Krishna": {"pitch": 0.9, "rate": 0.95}
+    "Sauti": {
+      "pitch": 1.1,
+      "rate": 1.0
+    },
+    "Shaunaka": {
+      "pitch": 0.8,
+      "rate": 0.95
+    },
+    "Janamejaya": {
+      "pitch": 0.9,
+      "rate": 1.05
+    },
+    "Astika": {
+      "pitch": 0.7,
+      "rate": 0.9
+    },
+    "Shantanu": {
+      "pitch": 0.75,
+      "rate": 0.9
+    },
+    "Ganga": {
+      "pitch": 1.25,
+      "rate": 0.95
+    },
+    "Bhishma": {
+      "pitch": 0.65,
+      "rate": 0.85
+    },
+    "Vyasa": {
+      "pitch": 0.7,
+      "rate": 0.9
+    },
+    "Satyavati": {
+      "pitch": 1.2,
+      "rate": 0.95
+    },
+    "Kunti": {
+      "pitch": 1.25,
+      "rate": 0.95
+    },
+    "Durvasa": {
+      "pitch": 0.7,
+      "rate": 0.9
+    },
+    "Drona": {
+      "pitch": 0.8,
+      "rate": 0.95
+    },
+    "Arjuna": {
+      "pitch": 1.0,
+      "rate": 1.0
+    },
+    "Yudhishthira": {
+      "pitch": 0.85,
+      "rate": 0.9
+    },
+    "Vidura": {
+      "pitch": 0.75,
+      "rate": 0.9
+    },
+    "Bhima": {
+      "pitch": 0.6,
+      "rate": 1.0
+    },
+    "Hidimbi": {
+      "pitch": 1.3,
+      "rate": 0.95
+    },
+    "Draupadi": {
+      "pitch": 1.3,
+      "rate": 1.0
+    },
+    "Dhritarashtra": {
+      "pitch": 0.7,
+      "rate": 0.85
+    },
+    "Krishna": {
+      "pitch": 0.9,
+      "rate": 0.95
+    }
   },
   "scenes": {
     "adi-01-naimisha": [
-      {"char": "Sauti", "arch": "sage", "line": "In Naimisha forest, the sages gather and ask for the tale of the Bharatas."},
-      {"char": "Shaunaka", "arch": "sage", "line": "Tell us, Sauti — how did one house inherit a curse that would demand a war?"},
-      {"char": "Sauti", "arch": "sage", "line": "Then listen. It begins with a king, a river, and a vow."}
+      {
+        "char": "Sauti",
+        "arch": "sage",
+        "line": "In Naimisha forest, the sages gather and ask for the tale of the Bharatas."
+      },
+      {
+        "char": "Shaunaka",
+        "arch": "sage",
+        "line": "Tell us, Sauti \u2014 how did one house inherit a curse that would demand a war?"
+      },
+      {
+        "char": "Sauti",
+        "arch": "sage",
+        "line": "Then listen. It begins with a king, a river, and a vow."
+      }
     ],
     "adi-02-snake-sacrifice": [
-      {"char": "Janamejaya", "arch": "king", "line": "For my father's death, every serpent shall feed these flames!"},
-      {"char": "Astika", "arch": "sage", "line": "Stop, King. When does justice become vengeance? Let the rite end."}
+      {
+        "char": "Janamejaya",
+        "arch": "king",
+        "line": "For my father's death, every serpent shall feed these flames!"
+      },
+      {
+        "char": "Astika",
+        "arch": "sage",
+        "line": "Stop, King. When does justice become vengeance? Let the rite end."
+      }
     ],
     "adi-03-ganga": [
-      {"char": "Shantanu", "arch": "king", "line": "Ganga — seven sons you returned to the river. Spare me the eighth!"},
-      {"char": "Ganga", "arch": "princess", "line": "Keep him, king. But every gift of the river has its price."}
+      {
+        "char": "Shantanu",
+        "arch": "king",
+        "line": "Ganga \u2014 seven sons you returned to the river. Spare me the eighth!"
+      },
+      {
+        "char": "Ganga",
+        "arch": "princess",
+        "line": "Keep him, king. But every gift of the river has its price."
+      }
     ],
     "adi-04-bhishma-vow": [
-      {"char": "Bhishma", "arch": "warrior", "line": "For my father's happiness, I renounce the crown and all children. Let the gods witness."},
-      {"char": "Shantanu", "arch": "king", "line": "What have I asked of you, my son? This vow will outlive us all."}
+      {
+        "char": "Bhishma",
+        "arch": "warrior",
+        "line": "For my father's happiness, I renounce the crown and all children. Let the gods witness."
+      },
+      {
+        "char": "Shantanu",
+        "arch": "king",
+        "line": "What have I asked of you, my son? This vow will outlive us all."
+      }
     ],
     "adi-05-vyasa-line": [
-      {"char": "Vyasa", "arch": "sage", "line": "The throne needs heirs, and the bloodline is knotted. I will do what dharma demands."},
-      {"char": "Satyavati", "arch": "princess", "line": "Then go, sage. And let history judge what the palace cannot."}
+      {
+        "char": "Vyasa",
+        "arch": "sage",
+        "line": "The throne needs heirs, and the bloodline is knotted. I will do what dharma demands."
+      },
+      {
+        "char": "Satyavati",
+        "arch": "princess",
+        "line": "Then go, sage. And let history judge what the palace cannot."
+      }
     ],
     "adi-06-births": [
-      {"char": "Kunti", "arch": "princess", "line": "A hundred cousins in the nursery — and one basket I set upon the river. Forgive me, Karna."},
-      {"char": "Durvasa", "arch": "sage", "line": "The mantras I gave you will shape kings, child. Use them wisely."}
+      {
+        "char": "Kunti",
+        "arch": "princess",
+        "line": "A hundred cousins in the nursery \u2014 and one basket I set upon the river. Forgive me, Karna."
+      },
+      {
+        "char": "Durvasa",
+        "arch": "sage",
+        "line": "The mantras I gave you will shape kings, child. Use them wisely."
+      }
     ],
     "adi-07-drona": [
-      {"char": "Drona", "arch": "sage", "line": "Arjuna's arrow finds whatever his eye holds. The rest of you — watch and learn."},
-      {"char": "Arjuna", "arch": "warrior", "line": "Master, my fee will be your honor itself. I will pay it."}
+      {
+        "char": "Drona",
+        "arch": "sage",
+        "line": "Arjuna's arrow finds whatever his eye holds. The rest of you \u2014 watch and learn."
+      },
+      {
+        "char": "Arjuna",
+        "arch": "warrior",
+        "line": "Master, my fee will be your honor itself. I will pay it."
+      }
     ],
     "adi-08-lakshagriha": [
-      {"char": "Yudhishthira", "arch": "warrior", "line": "A palace of lacquer, built to burn us alive. Walk softly, brothers."},
-      {"char": "Vidura", "arch": "sage", "line": "I warned you in riddles. The tunnel waits — vanish through the earth."}
+      {
+        "char": "Yudhishthira",
+        "arch": "warrior",
+        "line": "A palace of lacquer, built to burn us alive. Walk softly, brothers."
+      },
+      {
+        "char": "Vidura",
+        "arch": "sage",
+        "line": "I warned you in riddles. The tunnel waits \u2014 vanish through the earth."
+      }
     ],
     "adi-09-hidimba": [
-      {"char": "Bhima", "arch": "warrior", "line": "Hunger walks this forest on two legs, and I am hungrier for justice."},
-      {"char": "Hidimbi", "arch": "princess", "line": "Spare me, strong one — and I will show you love is also a kind of forest."}
+      {
+        "char": "Bhima",
+        "arch": "strongman",
+        "line": "Hunger walks this forest on two legs, and I am hungrier for justice."
+      },
+      {
+        "char": "Hidimbi",
+        "arch": "princess",
+        "line": "Spare me, strong one \u2014 and I will show you love is also a kind of forest."
+      }
     ],
     "adi-10-swayamvara": [
-      {"char": "Draupadi", "arch": "princess", "line": "The bow has chosen. But a mother's word will bind my garland to five brothers."},
-      {"char": "Arjuna", "arch": "warrior", "line": "I bent it as a Brahmin boy. Let the kings whisper — the fish has fallen."}
+      {
+        "char": "Draupadi",
+        "arch": "princess",
+        "line": "The bow has chosen. But a mother's word will bind my garland to five brothers."
+      },
+      {
+        "char": "Arjuna",
+        "arch": "warrior",
+        "line": "I bent it as a Brahmin boy. Let the kings whisper \u2014 the fish has fallen."
+      }
     ],
     "adi-11-division": [
-      {"char": "Dhritarashtra", "arch": "king", "line": "One kingdom cannot hold both houses. Take the wasteland, Pandavas, and go."},
-      {"char": "Yudhishthira", "arch": "warrior", "line": "We will take the wasteland, Uncle — and turn exile into a plan."}
+      {
+        "char": "Dhritarashtra",
+        "arch": "king",
+        "line": "One kingdom cannot hold both houses. Take the wasteland, Pandavas, and go."
+      },
+      {
+        "char": "Yudhishthira",
+        "arch": "warrior",
+        "line": "We will take the wasteland, Uncle \u2014 and turn exile into a plan."
+      }
     ],
     "adi-12-indraprastha": [
-      {"char": "Krishna", "arch": "warrior", "line": "Fire cleared Khandava; a white city rises. Every victory contains a wound."},
-      {"char": "Arjuna", "arch": "warrior", "line": "Then let this ending be a seed, Krishna — as every ending is."}
+      {
+        "char": "Krishna",
+        "arch": "warrior",
+        "line": "Fire cleared Khandava; a white city rises. Every victory contains a wound."
+      },
+      {
+        "char": "Arjuna",
+        "arch": "warrior",
+        "line": "Then let this ending be a seed, Krishna \u2014 as every ending is."
+      }
     ]
   }
 }
