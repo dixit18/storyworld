@@ -41,3 +41,6 @@ characters speak the scene's dialogue (TTS), with pause / 0.5× / 1× / 2× paci
 - S5 R&D (MCP not invocable here; Poly Haven REST instead), v2 look pass on all 12,
   normal-map weight cut (52→29MB), browser-verified with agent-browser.
 - S6 journey player (no Next), toon cast + dialogue, repo created + first push.
+- S7 competitor watch (Outerbook/3DStoryteller closest; our moat = roamable 3D +
+  paced journey + deterministic pipeline); journey soak test (1→2→3 advance OK,
+  dolly shortened 0.38→0.25 after shrine collision); repo: dixit18/storyworld.
