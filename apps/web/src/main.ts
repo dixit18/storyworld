@@ -328,8 +328,8 @@ async function main() {
     if (!seg) {
       const st = STYLE[sceneId];
       const a = new THREE.Vector3(...st.spawn.pos);
-      const b = a.clone().lerp(new THREE.Vector3(...st.spawn.target), 0.38);
-      b.y += 1.0;
+      const b = a.clone().lerp(new THREE.Vector3(...st.spawn.target), 0.25);
+      b.y += 1.5;
       const dir = b.clone().sub(a);
       seg = { dir: dir.clone().normalize(), len: dir.length() };
       segCache.set(sceneId, seg);
