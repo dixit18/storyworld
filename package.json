@@ -10,6 +10,7 @@
   ],
   "scripts": {
     "validate": "node tools/validate-content/validate.mjs",
+    "qa:jev": "node tools/jev-qa/qa.mjs",
     "test": "node --experimental-strip-types --test packages/world-runtime/test/*.mjs packages/narrative-runtime/test/*.mjs tests/*.mjs",
     "package-build": "node tools/package-build/build.mjs",
     "dev": "npm --workspace apps/web run dev",

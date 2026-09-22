@@ -18,23 +18,13 @@
         <p id="kicker">Mahabharata · Adi Parva · a journey</p>
         <h1 id="sceneTitle">Loading…</h1>
         <p id="narration"></p>
-        <div id="dialogue">
-          <p id="speaker"></p>
-          <p id="line"></p>
-        </div>
         <div id="journey"><div id="journeybar"></div></div>
         <div id="controls">
-          <button id="pause" type="button">Pause</button>
-          <span id="speed" role="group" aria-label="Journey speed">
-            <button type="button" data-speed="0">Stop</button>
-            <button type="button" data-speed="0.5">0.5×</button>
-            <button type="button" data-speed="1">1×</button>
-            <button type="button" data-speed="2">2×</button>
-          </span>
-          <button id="voice" type="button">Voice: on</button>
+          <button id="pause" type="button" title="Play / pause (Space)">Pause</button>
+          <button id="speedcycle" type="button" title="Journey speed">1×</button>
+          <button id="voice" type="button" title="Voice on/off">Voice: on</button>
         </div>
         <p id="progress"></p>
-        <p id="hint">The story moves on its own — drag to look around, WASD to roam, Space pauses.</p>
       </aside>
     </main>
     <script type="module" src="/src/main.ts"></script>

@@ -91,15 +91,25 @@ const canvas = document.getElementById('world') as HTMLCanvasElement;
 const elTitle = document.getElementById('sceneTitle')!;
 const elNarr = document.getElementById('narration')!;
 const elProg = document.getElementById('progress')!;
-const elSpeaker = document.getElementById('speaker')!;
-const elLine = document.getElementById('line')!;
 const elBar = document.getElementById('journeybar') as HTMLElement;
+const elInfo = document.getElementById('information')!;
 const btnPause = document.getElementById('pause') as HTMLButtonElement;
 const btnVoice = document.getElementById('voice') as HTMLButtonElement;
-const speedBtns = [...document.querySelectorAll<HTMLButtonElement>('#speed button')];
+const btnSpeed = document.getElementById('speedcycle') as HTMLButtonElement;
 const loader = document.getElementById('loader')!;
 const poster = document.getElementById('poster') as HTMLImageElement;
 const loadMsg = document.getElementById('loadmsg')!;
+
+// UI rests invisible; any activity wakes it briefly. The journey never waits.
+let awakeTimer: number | null = null;
+function wakeUI() {
+  elInfo.classList.add('awake');
+  if (awakeTimer) window.clearTimeout(awakeTimer);
+  awakeTimer = window.setTimeout(() => elInfo.classList.remove('awake'), 3500);
+}
+window.addEventListener('pointermove', wakeUI, { passive: true });
+window.addEventListener('pointerdown', wakeUI);
+window.addEventListener('keydown', wakeUI);
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -190,6 +200,57 @@ function addExtras(group: THREE.Group, st: SceneStyle, sceneId: string): (t: num
   };
 }
 
+// In-world speech bubble: one rounded card floating over the speaker.
+const bubble = (() => {
+  const cv = document.createElement('canvas');
+  cv.width = 512; cv.height = 256;
+  const g = cv.getContext('2d')!;
+  const tex = new THREE.CanvasTexture(cv);
+  tex.colorSpace = THREE.SRGBColorSpace;
+  const mat = new THREE.SpriteMaterial({ map: tex, transparent: true, depthTest: true });
+  const sprite = new THREE.Sprite(mat);
+  sprite.scale.set(5.2, 2.6, 1);
+  sprite.visible = false;
+  function wrap(text: string, max: number): string[] {
+    const words = text.split(' ');
+    const out: string[] = [];
+    let cur = '';
+    for (const w of words) {
+      if ((cur + ' ' + w).trim().length > max && cur) { out.push(cur); cur = w; }
+      else cur = (cur + ' ' + w).trim();
+    }
+    if (cur) out.push(cur);
+    return out.slice(0, 4);
+  }
+  return {
+    sprite,
+    show(speaker: string, line: string) {
+      g.clearRect(0, 0, 512, 256);
+      g.fillStyle = 'rgba(10,12,18,0.88)';
+      g.strokeStyle = '#c9a227';
+      g.lineWidth = 4;
+      g.beginPath();
+      (g as CanvasRenderingContext2D).roundRect(8, 8, 496, 200, 26);
+      g.fill(); g.stroke();
+      // tail
+      g.beginPath();
+      g.moveTo(226, 208); g.lineTo(286, 208); g.lineTo(256, 248); g.closePath();
+      g.fillStyle = 'rgba(10,12,18,0.88)';
+      g.fill();
+      g.fillStyle = '#c9a227';
+      g.font = '600 30px Georgia, serif';
+      g.fillText(speaker.toUpperCase().slice(0, 24), 36, 58);
+      g.fillStyle = '#f5f0e1';
+      g.font = 'italic 34px Georgia, serif';
+      wrap(line, 30).forEach((ln, i) => g.fillText(ln, 36, 108 + i * 38));
+      tex.needsUpdate = true;
+      mat.opacity = 1;
+      sprite.visible = true;
+    },
+    hide() { sprite.visible = false; },
+  };
+})();
+
 function speakLine(text: string, voice?: { pitch: number; rate: number }, enabled = true) {
   try {
     speechSynthesis.cancel();
@@ -246,11 +307,16 @@ async function main() {
   const segLen = () => SEG_SECONDS;
   const totalLen = () => SEG_SECONDS * scenes.length;
 
+  const SPEEDS = [1, 2, 0.5];
   function setSpeed(s: number) {
     speed = s;
-    for (const b of speedBtns) b.classList.toggle('on', Number(b.dataset.speed) === s);
+    btnSpeed.textContent = s === 0 ? 'Stopped' : `${s}×`;
+    btnSpeed.classList.toggle('on', s !== 1);
     engine.idleAutoRotate = !paused && speed === 0;
   }
+
+  // Speaking character groups, for bubble anchoring.
+  const speakers = new Map<string, THREE.Group>();
 
   async function enterScene(i: number) {
     index = i;
@@ -281,6 +347,7 @@ async function main() {
     }
     // Cast: toon characters placed around the story heart, facing the arrival.
     const camArrive = new THREE.Vector3(...st.spawn.pos);
+    speakers.clear();
     for (const c of CAST[sceneId] ?? []) {
       const ch = await getChar(c.arch);
       if (!ch) continue;
@@ -289,7 +356,10 @@ async function main() {
       ch.lookAt(camArrive.x, 0.45, camArrive.z);
       ch.rotateY(Math.PI); // models face -Z; turn them toward camera
       group.add(ch);
+      speakers.set(c.char, ch);
     }
+    group.add(bubble.sprite);
+    bubble.hide();
     const extraUpdate = addExtras(group, st, sceneId);
     const seedF = st.fires.map((f) => f.i);
     engine.setEnvironment({
@@ -347,8 +417,14 @@ async function main() {
     const li = Math.min(ls.length - 1, Math.floor(segElapsed / per));
     if (li !== lineIdx && ls[li]) {
       lineIdx = li;
-      elSpeaker.textContent = ls[li].char;
-      elLine.textContent = `“${ls[li].line}”`;
+      const who = speakers.get(ls[li].char);
+      if (who) {
+        bubble.sprite.position.copy(who.position);
+        bubble.sprite.position.y += 2.9 * who.scale.x;
+        bubble.show(ls[li].char, ls[li].line);
+      } else {
+        bubble.hide();
+      }
       const v = dlg.voices[ls[li].char];
       speakLine(ls[li].line, v, voiceOn && !paused);
     }
@@ -360,8 +436,7 @@ async function main() {
     if (index + 1 >= scenes.length) {
       journeyDone = true;
       setSpeed(0);
-      elSpeaker.textContent = 'The telling pauses';
-      elLine.textContent = '“Every ending is a seed. Replay the journey when you are ready.”';
+      bubble.hide();
       return;
     }
     loader.classList.add('visible');
@@ -371,7 +446,8 @@ async function main() {
   btnPause.onclick = () => {
     paused = !paused;
     btnPause.textContent = paused ? 'Play' : 'Pause';
-    if (paused) stopSpeech();
+    if (paused) { stopSpeech(); bubble.hide(); }
+    else { lineIdx = -1; wakeUI(); }
     engine.idleAutoRotate = !paused && speed === 0;
   };
   btnVoice.onclick = () => {
@@ -379,12 +455,12 @@ async function main() {
     btnVoice.textContent = voiceOn ? 'Voice: on' : 'Voice: off';
     if (!voiceOn) stopSpeech();
   };
-  for (const b of speedBtns) {
-    b.onclick = () => {
-      setSpeed(Number(b.dataset.speed));
-      if (paused && speed > 0) btnPause.click();
-    };
-  }
+  btnSpeed.onclick = () => {
+    const next = SPEEDS[(SPEEDS.indexOf(speed) + 1) % SPEEDS.length];
+    setSpeed(next);
+    if (paused && next > 0) btnPause.click();
+    wakeUI();
+  };
   window.addEventListener('keydown', (e) => {
     if (e.code === 'Space' && (e.target as HTMLElement)?.tagName !== 'BUTTON') {
       e.preventDefault();
