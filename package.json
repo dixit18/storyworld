@@ -1,0 +1,18 @@
+{
+  "name": "storyworld",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "tools/*"
+  ],
+  "scripts": {
+    "validate": "node tools/validate-content/validate.mjs",
+    "test": "node --experimental-strip-types --test packages/world-runtime/test/*.mjs packages/narrative-runtime/test/*.mjs tests/*.mjs",
+    "package-build": "node tools/package-build/build.mjs",
+    "dev": "npm --workspace apps/web run dev",
+    "build": "npm --workspace storyworld-web run build && npm --workspace storyworld-world-editor run build && npm --workspace storyworld-seam-editor run build && npm --workspace storyworld-studio run build"
+  }
+}

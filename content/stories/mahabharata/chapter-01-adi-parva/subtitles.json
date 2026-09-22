@@ -1,0 +1,19 @@
+{
+  "storyId": "mahabharata",
+  "chapterId": "chapter-01-adi-parva",
+  "language": "en",
+  "cues": [
+    {"sceneId": "adi-01-naimisha", "text": "In Naimisha forest, the sages gather and ask for the tale."},
+    {"sceneId": "adi-02-snake-sacrifice", "text": "Janamejaya's vengeance ritual. Astika intervenes."},
+    {"sceneId": "adi-03-ganga", "text": "Seven sons to the river; the eighth remains."},
+    {"sceneId": "adi-04-bhishma-vow", "text": "Devavrata renounces all. He becomes Bhishma."},
+    {"sceneId": "adi-05-vyasa-line", "text": "Three heirs; one throne; no easy answer."},
+    {"sceneId": "adi-06-births", "text": "A hundred cousins, five brothers, one abandoned child."},
+    {"sceneId": "adi-07-drona", "text": "Arjuna excels. Ekalavya pays with his thumb."},
+    {"sceneId": "adi-08-lakshagriha", "text": "The lacquer house burns. The Pandavas escape."},
+    {"sceneId": "adi-09-hidimba", "text": "Bhima faces hunger in the forest."},
+    {"sceneId": "adi-10-swayamvara", "text": "The bow chooses Arjuna. Draupadi weds five."},
+    {"sceneId": "adi-11-division", "text": "One kingdom, split in two."},
+    {"sceneId": "adi-12-indraprastha", "text": "From ashes, Indraprastha rises."}
+  ]
+}

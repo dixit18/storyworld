@@ -1,0 +1,24 @@
+{
+  "storyId": "string",
+  "title": "string",
+  "logline": "string",
+  "themes": [
+    "string"
+  ],
+  "majorCharacters": [
+    "string"
+  ],
+  "majorLocations": [
+    "string"
+  ],
+  "symbolicMotifs": [
+    "string"
+  ],
+  "chapterIndex": [
+    {
+      "chapterId": "string",
+      "title": "string",
+      "summary": "string"
+    }
+  ]
+}

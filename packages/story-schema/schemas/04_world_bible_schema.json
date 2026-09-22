@@ -1,0 +1,29 @@
+{
+  "storyId": "string",
+  "chapterId": "string",
+  "visualTheme": {
+    "palette": [
+      "string"
+    ],
+    "styleNotes": [
+      "string"
+    ],
+    "lightingNotes": [
+      "string"
+    ]
+  },
+  "scenes": [
+    {
+      "sceneId": "string",
+      "renderMode": "illustrated|2.5d|3d|hybrid|procedural",
+      "cameraMode": "string",
+      "assetNeeds": [
+        "string"
+      ],
+      "proceduralRules": [
+        "string"
+      ],
+      "transitionDesign": "string"
+    }
+  ]
+}

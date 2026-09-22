@@ -1,0 +1,18 @@
+{
+  "storyId": "mahabharata",
+  "chapterId": "chapter-01-adi-parva",
+  "blocks": [
+    {"sceneId": "adi-01-naimisha", "text": "In Naimisha forest, the sages gather and ask: tell us the tale of the Bharatas. Sauti bows, and the fire leans in to listen.", "durationSec": 12},
+    {"sceneId": "adi-02-snake-sacrifice", "text": "King Janamejaya feeds serpents to the flames to avenge his father. Astika steps forward: when does justice become vengeance?", "durationSec": 13},
+    {"sceneId": "adi-03-ganga", "text": "Shantanu loves the river herself. Seven sons she returns to the waters; the eighth she leaves behind — Devavrata.", "durationSec": 13},
+    {"sceneId": "adi-04-bhishma-vow", "text": "For his father's desire, Devavrata renounces crown and child. The gods rain flowers and name him Bhishma — the terrible oath.", "durationSec": 13},
+    {"sceneId": "adi-05-vyasa-line", "text": "A blind prince, a pale prince, a wise minister's son. The throne of Hastinapura learns to fear its own bloodline.", "durationSec": 12},
+    {"sceneId": "adi-06-births", "text": "A hundred Kauravas. Five Pandavas, god-born. And on the river, a basket carries away Karna — the son no one claimed.", "durationSec": 14},
+    {"sceneId": "adi-07-drona", "text": "Under Drona, Arjuna becomes peerless. Ekalavya pays his fee with his thumb. Excellence, too, has a price.", "durationSec": 13},
+    {"sceneId": "adi-08-lakshagriha", "text": "A palace of lacquer, built to burn. Warned by Vidura, the Pandavas vanish through the earth while the fire tells its lie.", "durationSec": 13},
+    {"sceneId": "adi-09-hidimba", "text": "In the dark forest, hunger has a name. Bhima kills Hidimba, spares love — and a new lineage begins.", "durationSec": 12},
+    {"sceneId": "adi-10-swayamvara", "text": "The bow bends for a Brahmin youth. Draupadi's garland chooses Arjuna — and, by a mother's word, binds five brothers.", "durationSec": 14},
+    {"sceneId": "adi-11-division", "text": "Hastinapura cannot hold both houses. The Pandavas are given a wasteland — and turn exile into a plan.", "durationSec": 12},
+    {"sceneId": "adi-12-indraprastha", "text": "Fire clears Khandava; a white city rises. Every victory contains a wound — and every ending, a seed.", "durationSec": 13}
+  ]
+}

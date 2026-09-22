@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Storyworld Studio — Asset Pipeline (Ch.01)</title>
+    <style>
+      body { font-family: Georgia, serif; background: #0c0f14; color: #f5f0e1; margin: 0; padding: 20px; }
+      h1 { color: #c9a227; margin-bottom: 4px; }
+      .sub { opacity: 0.75; margin-top: 0; }
+      nav.links { margin: 12px 0 20px; display: flex; gap: 10px; flex-wrap: wrap; }
+      nav.links a { color: #14100a; background: #c9a227; border-radius: 8px; padding: 6px 12px; text-decoration: none; font-size: 14px; }
+      section { margin-bottom: 28px; }
+      h2 { border-bottom: 1px solid #333; padding-bottom: 6px; }
+      .stages { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
+      .stage { background: #141926; border: 1px solid #333; border-radius: 10px; padding: 12px; }
+      .stage.done { border-color: #4a7c3a; }
+      .stage h3 { margin: 0 0 6px; font-size: 15px; }
+      .badge { display: inline-block; font-size: 12px; border-radius: 20px; padding: 2px 10px; background: #4a7c3a; color: #fff; }
+      .badge.warn { background: #8B2E1F; }
+      .badge.type { background: #2c3e5a; }
+      .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+      .card { background: #141926; border: 1px solid #333; border-radius: 10px; padding: 10px; font-size: 13px; }
+      .card img { width: 100%; border-radius: 6px; border: 1px solid #444; }
+      .card audio { width: 100%; margin-top: 6px; }
+      .card code { font-size: 11px; word-break: break-all; opacity: 0.8; }
+      pre { background: #141926; border: 1px solid #333; border-radius: 10px; padding: 12px; white-space: pre-wrap; font-size: 13px; }
+      #qa li { margin-bottom: 4px; }
+      .pass { color: #7fbf6a; } .fail { color: #e06a5a; }
+    </style>
+  </head>
+  <body>
+    <h1>Storyworld Studio</h1>
+    <p class="sub" id="pkgline">Loading chapter package…</p>
+    <nav class="links">
+      <a href="http://localhost:5199/" target="_blank" rel="noopener">▶ Player</a>
+      <a href="http://localhost:5198/" target="_blank" rel="noopener">World editor</a>
+      <a href="http://localhost:5197/" target="_blank" rel="noopener">Seam editor</a>
+    </nav>
+    <section><h2>Pipeline stages</h2><div class="stages" id="stages"></div></section>
+    <section><h2>Assets</h2><div class="grid" id="assets"></div></section>
+    <section><h2>QA</h2><ul id="qa"></ul><h3>Build log</h3><pre id="buildlog"></pre></section>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

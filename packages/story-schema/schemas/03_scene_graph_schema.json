@@ -1,0 +1,21 @@
+{
+  "storyId": "string",
+  "chapterId": "string",
+  "scenes": [
+    {
+      "sceneId": "string",
+      "title": "string",
+      "narrativeBeat": "string",
+      "purpose": "string",
+      "transitionIn": "string",
+      "transitionOut": "string",
+      "visualAnchor": "string",
+      "portalType": "string",
+      "characters": [
+        "string"
+      ],
+      "location": "string",
+      "emotion": "string"
+    }
+  ]
+}

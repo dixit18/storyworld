@@ -1,0 +1,11 @@
+{
+  "storyId": "mahabharata",
+  "chapterId": "chapter-01-adi-parva",
+  "tracks": [
+    {"trackId": "amb-forest", "kind": "ambience", "scenes": ["adi-01-naimisha", "adi-09-hidimba"], "file": "assets/audio/amb-forest.wav", "format": "wav-22050-mono", "loop": true, "status": "generated"},
+    {"trackId": "amb-fire", "kind": "ambience", "scenes": ["adi-02-snake-sacrifice", "adi-08-lakshagriha", "adi-12-indraprastha"], "file": "assets/audio/amb-fire.wav", "format": "wav-22050-mono", "loop": true, "status": "generated"},
+    {"trackId": "amb-river", "kind": "ambience", "scenes": ["adi-03-ganga", "adi-06-births"], "file": "assets/audio/amb-river.wav", "format": "wav-22050-mono", "loop": true, "status": "generated"},
+    {"trackId": "amb-court", "kind": "ambience", "scenes": ["adi-04-bhishma-vow", "adi-05-vyasa-line", "adi-07-drona", "adi-10-swayamvara", "adi-11-division"], "file": "assets/audio/amb-court.wav", "format": "wav-22050-mono", "loop": true, "status": "generated"},
+    {"trackId": "narration", "kind": "narration", "scenes": ["all"], "source": "narration.json", "engine": "web-speech-synthesis", "status": "runtime-tts"}
+  ]
+}

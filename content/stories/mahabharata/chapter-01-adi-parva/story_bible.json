@@ -1,0 +1,58 @@
+{
+  "storyId": "mahabharata",
+  "title": "Mahabharata — Adi Parva",
+  "logline": "A forest telling becomes a curse, a vow, and a rivalry: how the Bharata house inherits the debts that will one day demand a war.",
+  "themes": [
+    "inheritance",
+    "promises and their cost",
+    "legitimacy",
+    "loyalty vs justice",
+    "the cost of certainty"
+  ],
+  "majorCharacters": [
+    "Sauti/Ugrashravas (narrator)",
+    "Janamejaya",
+    "Astika",
+    "Shantanu",
+    "Ganga",
+    "Bhishma (Devavrata)",
+    "Satyavati",
+    "Vyasa",
+    "Dhritarashtra",
+    "Pandu",
+    "Kunti",
+    "Madri",
+    "Duryodhana",
+    "Yudhishthira",
+    "Bhima",
+    "Arjuna",
+    "Draupadi",
+    "Karna",
+    "Drona"
+  ],
+  "majorLocations": [
+    "Naimisha forest",
+    "Janamejaya's snake-sacrifice hall",
+    "Ganga riverbank",
+    "Hastinapura palace",
+    "Lakshagriha (house of lacquer)",
+    "Hidimba forest",
+    "Kampilyapura swayamvara hall",
+    "Indraprastha/Khandavaprastha clearing"
+  ],
+  "symbolicMotifs": [
+    "water/reflection — memory, ancestry, rebirth",
+    "fire — vow, transformation, destruction",
+    "door/gate — legitimacy and exclusion",
+    "arrow — intention becoming irreversible",
+    "crown — responsibility rather than reward",
+    "dice-seed — choice becoming fate"
+  ],
+  "chapterIndex": [
+    {
+      "chapterId": "chapter-01-adi-parva",
+      "title": "Adi Parva — The House That Inherited a Curse",
+      "summary": "From the forest narration through the snake sacrifice, the Bharata lineage, Bhishma's vow, the princes' birth and rivalry, the lacquer-house escape, Hidimba, Draupadi's swayamvara, to the founding of Indraprastha."
+    }
+  ]
+}

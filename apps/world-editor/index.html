@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Storyworld — World Editor (Ch.01)</title>
+    <style>
+      body { font-family: Georgia, serif; background: #0c0f14; color: #f5f0e1; margin: 0; padding: 20px; }
+      h1 { color: #c9a227; }
+      .grid { display: grid; grid-template-columns: 280px 1fr; gap: 16px; }
+      #list button { display: block; width: 100%; text-align: left; margin-bottom: 6px; background: #1a2030; color: #f5f0e1; border: 1px solid #333; border-radius: 8px; padding: 8px; cursor: pointer; }
+      #list button.active { border-color: #c9a227; }
+      .card { background: #141926; border: 1px solid #333; border-radius: 12px; padding: 16px; }
+      label { display: block; margin: 10px 0 4px; font-size: 13px; opacity: 0.8; }
+      select, textarea, input { width: 100%; background: #0c0f14; color: #f5f0e1; border: 1px solid #444; border-radius: 8px; padding: 8px; }
+      textarea { min-height: 70px; }
+      #actions { margin-top: 12px; display: flex; gap: 8px; }
+      button.primary { background: #c9a227; color: #14100a; border: 0; border-radius: 8px; padding: 8px 14px; cursor: pointer; }
+      .swatch { display: inline-block; width: 34px; height: 34px; border-radius: 6px; margin-right: 6px; border: 1px solid #555; }
+      img.preview { max-width: 100%; border-radius: 8px; border: 1px solid #444; margin-top: 8px; }
+    </style>
+  </head>
+  <body>
+    <h1>World Editor — Adi Parva</h1>
+    <p>Edit world-bible entries per scene. Export downloads the updated <code>world_bible.json</code>.</p>
+    <div class="grid">
+      <nav id="list" aria-label="Scenes"></nav>
+      <section class="card" id="editor" aria-live="polite"></section>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

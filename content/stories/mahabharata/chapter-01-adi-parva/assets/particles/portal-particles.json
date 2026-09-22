@@ -1,0 +1,26 @@
+{
+  "storyId": "mahabharata",
+  "chapterId": "chapter-01-adi-parva",
+  "emitters": {
+    "fire": { "count": 70, "color": "#E8A33D", "size": [1.5, 3.5], "rise": 0.55, "drift": 0.35, "alpha": 0.8 },
+    "water": { "count": 50, "color": "#9FC3DD", "size": [1, 2.5], "rise": -0.15, "drift": 0.8, "alpha": 0.55 },
+    "arrow": { "count": 24, "color": "#F5F0E1", "size": [1, 2], "rise": 0.1, "drift": 1.4, "alpha": 0.6 },
+    "door": { "count": 36, "color": "#C9A227", "size": [1, 2.5], "rise": 0.25, "drift": 0.25, "alpha": 0.5 },
+    "wheel": { "count": 40, "color": "#C9A227", "size": [1, 2.5], "rise": 0.2, "drift": 0.6, "alpha": 0.5 },
+    "crown": { "count": 30, "color": "#F5E0A0", "size": [1, 2.5], "rise": 0.3, "drift": 0.2, "alpha": 0.55 }
+  },
+  "portalByScene": {
+    "adi-01-naimisha": "fire",
+    "adi-02-snake-sacrifice": "fire",
+    "adi-03-ganga": "water",
+    "adi-04-bhishma-vow": "door",
+    "adi-05-vyasa-line": "wheel",
+    "adi-06-births": "water",
+    "adi-07-drona": "arrow",
+    "adi-08-lakshagriha": "fire",
+    "adi-09-hidimba": "door",
+    "adi-10-swayamvara": "arrow",
+    "adi-11-division": "door",
+    "adi-12-indraprastha": "fire"
+  }
+}

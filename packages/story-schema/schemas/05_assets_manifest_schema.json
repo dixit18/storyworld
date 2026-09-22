@@ -1,0 +1,17 @@
+{
+  "storyId": "string",
+  "chapterId": "string",
+  "assets": [
+    {
+      "assetId": "string",
+      "type": "image|layered-image|model|texture|audio|subtitle|shader|particle",
+      "path": "string",
+      "source": "string",
+      "version": "string",
+      "optimizationStatus": "raw|optimized",
+      "tags": [
+        "string"
+      ]
+    }
+  ]
+}

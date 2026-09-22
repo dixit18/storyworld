@@ -1,0 +1,185 @@
+{
+  "storyId": "mahabharata",
+  "chapterId": "chapter-01-adi-parva",
+  "visualTheme": {
+    "palette": [
+      "#C9A227",
+      "#1E4E79",
+      "#F5F0E1",
+      "#1F4D2E",
+      "#8B2E1F"
+    ],
+    "styleNotes": [
+      "miniature-meets-mural: flat gold ornament over deep river-blue space",
+      "every frame contains its successor seed at center (r=0.5 nesting)",
+      "bridge motifs (fire/smoke/river/arrow/cloth) cross seam boundaries"
+    ],
+    "lightingNotes": [
+      "warm fire key, cool river fill",
+      "palace scenes: ivory bounce; forest: ember rim",
+      "loop closure adi-12 \u2192 adi-01 matched on fire color-temp"
+    ]
+  },
+  "scenes": [
+    {
+      "sceneId": "adi-01-naimisha",
+      "renderMode": "3d",
+      "cameraMode": "slow-push-to-fire",
+      "assetNeeds": [
+        "adi-01-bg",
+        "adi-01-fire-particles"
+      ],
+      "proceduralRules": [
+        "concentric-sage-ring(seed)",
+        "fire-flicker(seed,t)"
+      ],
+      "transitionDesign": "fade-from-black; zoom-into-fire center 50%"
+    },
+    {
+      "sceneId": "adi-02-snake-sacrifice",
+      "renderMode": "3d",
+      "cameraMode": "slow-push-to-smoke",
+      "assetNeeds": [
+        "adi-02-bg",
+        "adi-02-serpent-particles"
+      ],
+      "proceduralRules": [
+        "serpent-rise(seed,t)",
+        "smoke-column(seed,t)"
+      ],
+      "transitionDesign": "fire seam \u2192 smoke column becomes river"
+    },
+    {
+      "sceneId": "adi-03-ganga",
+      "renderMode": "3d",
+      "cameraMode": "lateral-drift-then-push",
+      "assetNeeds": [
+        "adi-03-bg",
+        "adi-03-water-shader"
+      ],
+      "proceduralRules": [
+        "river-shimmer(seed,t)",
+        "reflection-mirror"
+      ],
+      "transitionDesign": "smoke-river \u2192 real river; push to palace door in reflection"
+    },
+    {
+      "sceneId": "adi-04-bhishma-vow",
+      "renderMode": "3d",
+      "cameraMode": "locked-then-push-to-crown",
+      "assetNeeds": [
+        "adi-04-bg"
+      ],
+      "proceduralRules": [
+        "oath-light-beam(seed)"
+      ],
+      "transitionDesign": "door seam \u2192 crown close-up"
+    },
+    {
+      "sceneId": "adi-05-vyasa-line",
+      "renderMode": "3d",
+      "cameraMode": "slow-push-to-cradles",
+      "assetNeeds": [
+        "adi-05-bg"
+      ],
+      "proceduralRules": [
+        "three-cradle-triad(seed)"
+      ],
+      "transitionDesign": "crown \u2192 cradle wheel"
+    },
+    {
+      "sceneId": "adi-06-births",
+      "renderMode": "3d",
+      "cameraMode": "river-drift",
+      "assetNeeds": [
+        "adi-06-bg",
+        "adi-06-water-shader"
+      ],
+      "proceduralRules": [
+        "basket-drift(seed,t)",
+        "lamp-bokeh"
+      ],
+      "transitionDesign": "cradle wheel \u2192 river basket; basket becomes arrow quiver"
+    },
+    {
+      "sceneId": "adi-07-drona",
+      "renderMode": "3d",
+      "cameraMode": "snap-zoom-arrow",
+      "assetNeeds": [
+        "adi-07-bg"
+      ],
+      "proceduralRules": [
+        "arrow-split(seed)",
+        "target-rings(seed)"
+      ],
+      "transitionDesign": "arrows \u2192 lacquer flame tongues"
+    },
+    {
+      "sceneId": "adi-08-lakshagriha",
+      "renderMode": "3d",
+      "cameraMode": "orbit-then-tunnel-push",
+      "assetNeeds": [
+        "adi-08-bg",
+        "adi-08-fire-particles"
+      ],
+      "proceduralRules": [
+        "flame-spread(seed,t)",
+        "tunnel-darken"
+      ],
+      "transitionDesign": "flame \u2192 forest eyes (embers to eyes)"
+    },
+    {
+      "sceneId": "adi-09-hidimba",
+      "renderMode": "3d",
+      "cameraMode": "push-through-trees",
+      "assetNeeds": [
+        "adi-09-bg"
+      ],
+      "proceduralRules": [
+        "eye-glint(seed,t)",
+        "canopy-sway(seed,t)"
+      ],
+      "transitionDesign": "eyes \u2192 target eye reflection"
+    },
+    {
+      "sceneId": "adi-10-swayamvara",
+      "renderMode": "3d",
+      "cameraMode": "overhead-to-bow",
+      "assetNeeds": [
+        "adi-10-bg"
+      ],
+      "proceduralRules": [
+        "fish-eye-target(seed)",
+        "garland-knot(seed)"
+      ],
+      "transitionDesign": "target \u2192 cloth knot close-up"
+    },
+    {
+      "sceneId": "adi-11-division",
+      "renderMode": "3d",
+      "cameraMode": "map-tear-push",
+      "assetNeeds": [
+        "adi-11-bg"
+      ],
+      "proceduralRules": [
+        "map-tear(seed)",
+        "half-crown(seed)"
+      ],
+      "transitionDesign": "cloth knot \u2192 torn map fiber"
+    },
+    {
+      "sceneId": "adi-12-indraprastha",
+      "renderMode": "3d",
+      "cameraMode": "rise-and-push-to-fire",
+      "assetNeeds": [
+        "adi-12-bg",
+        "adi-12-fire-particles"
+      ],
+      "proceduralRules": [
+        "forest-to-palace-morph(seed,t)",
+        "loop-match-fire(adi-01)"
+      ],
+      "transitionDesign": "clearing fire \u2192 loop seed matching adi-01 fire; infinite loop"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "storyId": "mahabharata",
+  "title": "Mahabharata — Adi Parva: The House That Inherited a Curse",
+  "sourceType": "condensed-adaptation",
+  "genre": "epic",
+  "scope": "chapter-01-adi-parva",
+  "language": "en",
+  "audience": "general-12-plus",
+  "authenticityLevel": "adaptation-faithful-beats",
+  "adaptationType": "interactive-storyworld",
+  "constraints": [
+    "no purely good-or-evil framing",
+    "every victory contains a wound",
+    "12 scenes, portal-linked infinite-zoom transitions",
+    "procedural placeholder art in v0, authored art replaces per-scene in phase 2"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "storyId": "mahabharata",
+  "chapterId": "chapter-01-adi-parva",
+  "nestingRatio": 0.5,
+  "maxLiveImages": 4,
+  "zoomSecondsPerScene": 14,
+  "transitions": [
+    {"from": "adi-01-naimisha", "to": "adi-02-snake-sacrifice", "type": "zoom-into-fire", "durationSec": 3.5},
+    {"from": "adi-02-snake-sacrifice", "to": "adi-03-ganga", "type": "zoom-into-smoke-river", "durationSec": 3.5},
+    {"from": "adi-03-ganga", "to": "adi-04-bhishma-vow", "type": "zoom-into-palace-door", "durationSec": 3.5},
+    {"from": "adi-04-bhishma-vow", "to": "adi-05-vyasa-line", "type": "zoom-into-crown", "durationSec": 3},
+    {"from": "adi-05-vyasa-line", "to": "adi-06-births", "type": "zoom-into-cradle-wheel", "durationSec": 3},
+    {"from": "adi-06-births", "to": "adi-07-drona", "type": "zoom-into-training-arrows", "durationSec": 3},
+    {"from": "adi-07-drona", "to": "adi-08-lakshagriha", "type": "zoom-into-lacquer-flame", "durationSec": 3.5},
+    {"from": "adi-08-lakshagriha", "to": "adi-09-hidimba", "type": "zoom-into-forest-eyes", "durationSec": 3.5},
+    {"from": "adi-09-hidimba", "to": "adi-10-swayamvara", "type": "zoom-into-target-eye", "durationSec": 3.5},
+    {"from": "adi-10-swayamvara", "to": "adi-11-division", "type": "zoom-into-cloth-knot", "durationSec": 3},
+    {"from": "adi-11-division", "to": "adi-12-indraprastha", "type": "zoom-into-cleared-fire", "durationSec": 3},
+    {"from": "adi-12-indraprastha", "to": "adi-01-naimisha", "type": "zoom-loop-to-naimisha", "durationSec": 4, "loopClosure": true}
+  ]
+}

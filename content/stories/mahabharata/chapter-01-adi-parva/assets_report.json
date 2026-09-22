@@ -1,0 +1,131 @@
+{
+  "storyId": "mahabharata",
+  "chapterId": "chapter-01-adi-parva",
+  "generatedAt": "2026-09-22",
+  "assets": [
+    {
+      "assetId": "adi-01-naimisha-bg",
+      "path": "assets/images/adi-01-naimisha.svg",
+      "bytes": 13448,
+      "gzipBytes": 2363,
+      "savedBytes": 0,
+      "width": 1024,
+      "height": 768,
+      "status": "pass"
+    },
+    {
+      "assetId": "adi-02-snake-sacrifice-bg",
+      "path": "assets/images/adi-02-snake-sacrifice.svg",
+      "bytes": 10064,
+      "gzipBytes": 2204,
+      "savedBytes": 0,
+      "width": 1024,
+      "height": 768,
+      "status": "pass"
+    },
+    {
+      "assetId": "adi-03-ganga-bg",
+      "path": "assets/images/adi-03-ganga.svg",
+      "bytes": 5898,
+      "gzipBytes": 1135,
+      "savedBytes": 0,
+      "width": 1024,
+      "height": 768,
+      "status": "pass"
+    },
+    {
+      "assetId": "adi-04-bhishma-vow-bg",
+      "path": "assets/images/adi-04-bhishma-vow.svg",
+      "bytes": 5031,
+      "gzipBytes": 1090,
+      "savedBytes": 0,
+      "width": 1024,
+      "height": 768,
+      "status": "pass"
+    },
+    {
+      "assetId": "adi-05-vyasa-line-bg",
+      "path": "assets/images/adi-05-vyasa-line.svg",
+      "bytes": 5298,
+      "gzipBytes": 1082,
+      "savedBytes": 0,
+      "width": 1024,
+      "height": 768,
+      "status": "pass"
+    },
+    {
+      "assetId": "adi-06-births-bg",
+      "path": "assets/images/adi-06-births.svg",
+      "bytes": 7292,
+      "gzipBytes": 1278,
+      "savedBytes": 0,
+      "width": 1024,
+      "height": 768,
+      "status": "pass"
+    },
+    {
+      "assetId": "adi-07-drona-bg",
+      "path": "assets/images/adi-07-drona.svg",
+      "bytes": 6068,
+      "gzipBytes": 1177,
+      "savedBytes": 0,
+      "width": 1024,
+      "height": 768,
+      "status": "pass"
+    },
+    {
+      "assetId": "adi-08-lakshagriha-bg",
+      "path": "assets/images/adi-08-lakshagriha.svg",
+      "bytes": 9252,
+      "gzipBytes": 2034,
+      "savedBytes": 0,
+      "width": 1024,
+      "height": 768,
+      "status": "pass"
+    },
+    {
+      "assetId": "adi-09-hidimba-bg",
+      "path": "assets/images/adi-09-hidimba.svg",
+      "bytes": 10943,
+      "gzipBytes": 1689,
+      "savedBytes": 0,
+      "width": 1024,
+      "height": 768,
+      "status": "pass"
+    },
+    {
+      "assetId": "adi-10-swayamvara-bg",
+      "path": "assets/images/adi-10-swayamvara.svg",
+      "bytes": 5376,
+      "gzipBytes": 1061,
+      "savedBytes": 0,
+      "width": 1024,
+      "height": 768,
+      "status": "pass"
+    },
+    {
+      "assetId": "adi-11-division-bg",
+      "path": "assets/images/adi-11-division.svg",
+      "bytes": 4830,
+      "gzipBytes": 1103,
+      "savedBytes": 0,
+      "width": 1024,
+      "height": 768,
+      "status": "pass"
+    },
+    {
+      "assetId": "adi-12-indraprastha-bg",
+      "path": "assets/images/adi-12-indraprastha.svg",
+      "bytes": 11262,
+      "gzipBytes": 2037,
+      "savedBytes": 0,
+      "width": 1024,
+      "height": 768,
+      "status": "pass"
+    }
+  ],
+  "totalGzipBytes": 18253,
+  "budgets": {
+    "perAssetGzipBytes": 20000
+  }
+}

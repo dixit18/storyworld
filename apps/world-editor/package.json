@@ -1,0 +1,19 @@
+{
+  "name": "storyworld-world-editor",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port 5174",
+    "build": "vite build",
+    "preview": "vite preview --port 5198",
+    "prebuild": "node ../../tools/package-build/build.mjs apps/world-editor"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.0",
+    "vite": "^6.0.0"
+  },
+  "dependencies": {
+    "@storyworld/narrative-runtime": "0.2.0"
+  }
+}

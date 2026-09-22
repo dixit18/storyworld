@@ -1,0 +1,66 @@
+{
+  "storyId": "mahabharata",
+  "chapterId": "chapter-01-adi-parva",
+  "levels": {
+    "adi-01-naimisha-bg": {
+      "full": "assets/images/adi-01-naimisha.svg",
+      "poster": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2232%22%20height%3D%2224%22%20viewBox%3D%220%200%2032%2024%22%3E%3Crect%20width%3D%2232%22%20height%3D%2224%22%20fill%3D%22%230d1f16%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2212%22%20r%3D%225%22%20fill%3D%22%23C9A227%22%2F%3E%3C%2Fsvg%3E",
+      "fallback": "procedural"
+    },
+    "adi-02-snake-sacrifice-bg": {
+      "full": "assets/images/adi-02-snake-sacrifice.svg",
+      "poster": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2232%22%20height%3D%2224%22%20viewBox%3D%220%200%2032%2024%22%3E%3Crect%20width%3D%2232%22%20height%3D%2224%22%20fill%3D%22%231a0d0d%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2212%22%20r%3D%225%22%20fill%3D%22%23F5F0E1%22%2F%3E%3C%2Fsvg%3E",
+      "fallback": "procedural"
+    },
+    "adi-03-ganga-bg": {
+      "full": "assets/images/adi-03-ganga.svg",
+      "poster": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2232%22%20height%3D%2224%22%20viewBox%3D%220%200%2032%2024%22%3E%3Crect%20width%3D%2232%22%20height%3D%2224%22%20fill%3D%22%230e2438%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2212%22%20r%3D%225%22%20fill%3D%22%23F5F0E1%22%2F%3E%3C%2Fsvg%3E",
+      "fallback": "procedural"
+    },
+    "adi-04-bhishma-vow-bg": {
+      "full": "assets/images/adi-04-bhishma-vow.svg",
+      "poster": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2232%22%20height%3D%2224%22%20viewBox%3D%220%200%2032%2024%22%3E%3Crect%20width%3D%2232%22%20height%3D%2224%22%20fill%3D%22%23241d10%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2212%22%20r%3D%225%22%20fill%3D%22%23C9A227%22%2F%3E%3C%2Fsvg%3E",
+      "fallback": "procedural"
+    },
+    "adi-05-vyasa-line-bg": {
+      "full": "assets/images/adi-05-vyasa-line.svg",
+      "poster": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2232%22%20height%3D%2224%22%20viewBox%3D%220%200%2032%2024%22%3E%3Crect%20width%3D%2232%22%20height%3D%2224%22%20fill%3D%22%23191926%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2212%22%20r%3D%225%22%20fill%3D%22%23F5F0E1%22%2F%3E%3C%2Fsvg%3E",
+      "fallback": "procedural"
+    },
+    "adi-06-births-bg": {
+      "full": "assets/images/adi-06-births.svg",
+      "poster": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2232%22%20height%3D%2224%22%20viewBox%3D%220%200%2032%2024%22%3E%3Crect%20width%3D%2232%22%20height%3D%2224%22%20fill%3D%22%230e2438%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2212%22%20r%3D%225%22%20fill%3D%22%23C9A227%22%2F%3E%3C%2Fsvg%3E",
+      "fallback": "procedural"
+    },
+    "adi-07-drona-bg": {
+      "full": "assets/images/adi-07-drona.svg",
+      "poster": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2232%22%20height%3D%2224%22%20viewBox%3D%220%200%2032%2024%22%3E%3Crect%20width%3D%2232%22%20height%3D%2224%22%20fill%3D%22%232a1a0d%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2212%22%20r%3D%225%22%20fill%3D%22%23F5F0E1%22%2F%3E%3C%2Fsvg%3E",
+      "fallback": "procedural"
+    },
+    "adi-08-lakshagriha-bg": {
+      "full": "assets/images/adi-08-lakshagriha.svg",
+      "poster": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2232%22%20height%3D%2224%22%20viewBox%3D%220%200%2032%2024%22%3E%3Crect%20width%3D%2232%22%20height%3D%2224%22%20fill%3D%22%231a0d0d%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2212%22%20r%3D%225%22%20fill%3D%22%23C9A227%22%2F%3E%3C%2Fsvg%3E",
+      "fallback": "procedural"
+    },
+    "adi-09-hidimba-bg": {
+      "full": "assets/images/adi-09-hidimba.svg",
+      "poster": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2232%22%20height%3D%2224%22%20viewBox%3D%220%200%2032%2024%22%3E%3Crect%20width%3D%2232%22%20height%3D%2224%22%20fill%3D%22%23070f0c%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2212%22%20r%3D%225%22%20fill%3D%22%23C9A227%22%2F%3E%3C%2Fsvg%3E",
+      "fallback": "procedural"
+    },
+    "adi-10-swayamvara-bg": {
+      "full": "assets/images/adi-10-swayamvara.svg",
+      "poster": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2232%22%20height%3D%2224%22%20viewBox%3D%220%200%2032%2024%22%3E%3Crect%20width%3D%2232%22%20height%3D%2224%22%20fill%3D%22%23241d10%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2212%22%20r%3D%225%22%20fill%3D%22%23F5F0E1%22%2F%3E%3C%2Fsvg%3E",
+      "fallback": "procedural"
+    },
+    "adi-11-division-bg": {
+      "full": "assets/images/adi-11-division.svg",
+      "poster": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2232%22%20height%3D%2224%22%20viewBox%3D%220%200%2032%2024%22%3E%3Crect%20width%3D%2232%22%20height%3D%2224%22%20fill%3D%22%23191926%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2212%22%20r%3D%225%22%20fill%3D%22%23C9A227%22%2F%3E%3C%2Fsvg%3E",
+      "fallback": "procedural"
+    },
+    "adi-12-indraprastha-bg": {
+      "full": "assets/images/adi-12-indraprastha.svg",
+      "poster": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2232%22%20height%3D%2224%22%20viewBox%3D%220%200%2032%2024%22%3E%3Crect%20width%3D%2232%22%20height%3D%2224%22%20fill%3D%22%230e2438%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2212%22%20r%3D%225%22%20fill%3D%22%23F5F0E1%22%2F%3E%3C%2Fsvg%3E",
+      "fallback": "procedural"
+    }
+  }
+}

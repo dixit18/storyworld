@@ -1,0 +1,682 @@
+{
+  "storyId": "mahabharata",
+  "chapterId": "chapter-01-adi-parva",
+  "assets": [
+    {
+      "assetId": "adi-01-bg",
+      "type": "image",
+      "path": "assets/images/adi-01-naimisha.svg",
+      "source": "keyframe-v1",
+      "version": "0.2.0",
+      "optimizationStatus": "optimized",
+      "tags": [
+        "forest",
+        "fire",
+        "entry"
+      ]
+    },
+    {
+      "assetId": "adi-02-bg",
+      "type": "image",
+      "path": "assets/images/adi-02-snake-sacrifice.svg",
+      "source": "keyframe-v1",
+      "version": "0.2.0",
+      "optimizationStatus": "optimized",
+      "tags": [
+        "fire",
+        "serpent"
+      ]
+    },
+    {
+      "assetId": "adi-03-bg",
+      "type": "image",
+      "path": "assets/images/adi-03-ganga.svg",
+      "source": "keyframe-v1",
+      "version": "0.2.0",
+      "optimizationStatus": "optimized",
+      "tags": [
+        "river",
+        "water-portal"
+      ]
+    },
+    {
+      "assetId": "adi-04-bg",
+      "type": "image",
+      "path": "assets/images/adi-04-bhishma-vow.svg",
+      "source": "keyframe-v1",
+      "version": "0.2.0",
+      "optimizationStatus": "optimized",
+      "tags": [
+        "throne",
+        "vow"
+      ]
+    },
+    {
+      "assetId": "adi-05-bg",
+      "type": "image",
+      "path": "assets/images/adi-05-vyasa-line.svg",
+      "source": "keyframe-v1",
+      "version": "0.2.0",
+      "optimizationStatus": "optimized",
+      "tags": [
+        "court",
+        "cradle"
+      ]
+    },
+    {
+      "assetId": "adi-06-bg",
+      "type": "image",
+      "path": "assets/images/adi-06-births.svg",
+      "source": "keyframe-v1",
+      "version": "0.2.0",
+      "optimizationStatus": "optimized",
+      "tags": [
+        "river",
+        "basket"
+      ]
+    },
+    {
+      "assetId": "adi-07-bg",
+      "type": "image",
+      "path": "assets/images/adi-07-drona.svg",
+      "source": "keyframe-v1",
+      "version": "0.2.0",
+      "optimizationStatus": "optimized",
+      "tags": [
+        "arrows",
+        "training"
+      ]
+    },
+    {
+      "assetId": "adi-08-bg",
+      "type": "image",
+      "path": "assets/images/adi-08-lakshagriha.svg",
+      "source": "keyframe-v1",
+      "version": "0.2.0",
+      "optimizationStatus": "optimized",
+      "tags": [
+        "fire",
+        "palace"
+      ]
+    },
+    {
+      "assetId": "adi-09-bg",
+      "type": "image",
+      "path": "assets/images/adi-09-hidimba.svg",
+      "source": "keyframe-v1",
+      "version": "0.2.0",
+      "optimizationStatus": "optimized",
+      "tags": [
+        "forest",
+        "eyes"
+      ]
+    },
+    {
+      "assetId": "adi-10-bg",
+      "type": "image",
+      "path": "assets/images/adi-10-swayamvara.svg",
+      "source": "keyframe-v1",
+      "version": "0.2.0",
+      "optimizationStatus": "optimized",
+      "tags": [
+        "target",
+        "bow"
+      ]
+    },
+    {
+      "assetId": "adi-11-bg",
+      "type": "image",
+      "path": "assets/images/adi-11-division.svg",
+      "source": "keyframe-v1",
+      "version": "0.2.0",
+      "optimizationStatus": "optimized",
+      "tags": [
+        "map",
+        "crown"
+      ]
+    },
+    {
+      "assetId": "adi-12-bg",
+      "type": "image",
+      "path": "assets/images/adi-12-indraprastha.svg",
+      "source": "keyframe-v1",
+      "version": "0.2.0",
+      "optimizationStatus": "optimized",
+      "tags": [
+        "city",
+        "fire",
+        "loop"
+      ]
+    },
+    {
+      "assetId": "amb-forest",
+      "type": "audio",
+      "path": "assets/audio/amb-forest.wav",
+      "source": "synth-v1",
+      "version": "0.2.0",
+      "optimizationStatus": "optimized",
+      "tags": [
+        "ambience",
+        "loop"
+      ]
+    },
+    {
+      "assetId": "amb-fire",
+      "type": "audio",
+      "path": "assets/audio/amb-fire.wav",
+      "source": "synth-v1",
+      "version": "0.2.0",
+      "optimizationStatus": "optimized",
+      "tags": [
+        "ambience",
+        "loop"
+      ]
+    },
+    {
+      "assetId": "amb-river",
+      "type": "audio",
+      "path": "assets/audio/amb-river.wav",
+      "source": "synth-v1",
+      "version": "0.2.0",
+      "optimizationStatus": "optimized",
+      "tags": [
+        "ambience",
+        "loop"
+      ]
+    },
+    {
+      "assetId": "amb-court",
+      "type": "audio",
+      "path": "assets/audio/amb-court.wav",
+      "source": "synth-v1",
+      "version": "0.2.0",
+      "optimizationStatus": "optimized",
+      "tags": [
+        "ambience",
+        "loop"
+      ]
+    },
+    {
+      "assetId": "tex-grain",
+      "type": "texture",
+      "path": "assets/textures/grain.svg",
+      "source": "procedural-v1",
+      "version": "0.2.0",
+      "optimizationStatus": "optimized",
+      "tags": [
+        "overlay",
+        "film-grain"
+      ]
+    },
+    {
+      "assetId": "tex-vignette",
+      "type": "texture",
+      "path": "assets/textures/vignette.svg",
+      "source": "procedural-v1",
+      "version": "0.2.0",
+      "optimizationStatus": "optimized",
+      "tags": [
+        "overlay",
+        "vignette"
+      ]
+    },
+    {
+      "assetId": "shader-water",
+      "type": "shader",
+      "path": "assets/shaders/water.glsl",
+      "source": "stub-v1",
+      "version": "0.2.0",
+      "optimizationStatus": "raw",
+      "tags": [
+        "phase-2",
+        "webgl"
+      ]
+    },
+    {
+      "assetId": "particles-portals",
+      "type": "particle",
+      "path": "assets/particles/portal-particles.json",
+      "source": "authored-v1",
+      "version": "0.2.0",
+      "optimizationStatus": "optimized",
+      "tags": [
+        "particles",
+        "portal"
+      ]
+    },
+    {
+      "assetId": "adi-01-naimisha-env",
+      "type": "model",
+      "path": "assets/models/adi-01-naimisha.glb",
+      "source": "blender-v1",
+      "version": "0.3.0",
+      "optimizationStatus": "optimized",
+      "tags": [
+        "forest",
+        "fire",
+        "night",
+        "glb",
+        "draco"
+      ]
+    },
+    {
+      "assetId": "adi-01-naimisha-keyframe",
+      "type": "image",
+      "path": "assets/renders/adi-01-naimisha.jpg",
+      "source": "blender-v1",
+      "version": "0.3.0",
+      "optimizationStatus": "optimized",
+      "tags": [
+        "forest",
+        "fire",
+        "night",
+        "keyframe",
+        "cycles"
+      ]
+    },
+    {
+      "assetId": "adi-02-snake-sacrifice-env",
+      "type": "model",
+      "path": "assets/models/adi-02-snake-sacrifice.glb",
+      "source": "blender-v1",
+      "version": "0.3.0",
+      "optimizationStatus": "optimized",
+      "tags": [
+        "fire",
+        "serpent",
+        "hall",
+        "glb",
+        "draco"
+      ]
+    },
+    {
+      "assetId": "adi-02-snake-sacrifice-keyframe",
+      "type": "image",
+      "path": "assets/renders/adi-02-snake-sacrifice.jpg",
+      "source": "blender-v1",
+      "version": "0.3.0",
+      "optimizationStatus": "optimized",
+      "tags": [
+        "fire",
+        "serpent",
+        "hall",
+        "keyframe",
+        "cycles"
+      ]
+    },
+    {
+      "assetId": "adi-03-ganga-env",
+      "type": "model",
+      "path": "assets/models/adi-03-ganga.glb",
+      "source": "blender-v1",
+      "version": "0.3.0",
+      "optimizationStatus": "optimized",
+      "tags": [
+        "river",
+        "dawn",
+        "shrine",
+        "glb",
+        "draco"
+      ]
+    },
+    {
+      "assetId": "adi-03-ganga-keyframe",
+      "type": "image",
+      "path": "assets/renders/adi-03-ganga.jpg",
+      "source": "blender-v1",
+      "version": "0.3.0",
+      "optimizationStatus": "optimized",
+      "tags": [
+        "river",
+        "dawn",
+        "shrine",
+        "keyframe",
+        "cycles"
+      ]
+    },
+    {
+      "assetId": "adi-04-bhishma-vow-env",
+      "type": "model",
+      "path": "assets/models/adi-04-bhishma-vow.glb",
+      "source": "blender-v1",
+      "version": "0.3.0",
+      "optimizationStatus": "optimized",
+      "tags": [
+        "throne",
+        "vow",
+        "hall",
+        "glb",
+        "draco"
+      ]
+    },
+    {
+      "assetId": "adi-04-bhishma-vow-keyframe",
+      "type": "image",
+      "path": "assets/renders/adi-04-bhishma-vow.jpg",
+      "source": "blender-v1",
+      "version": "0.3.0",
+      "optimizationStatus": "optimized",
+      "tags": [
+        "throne",
+        "vow",
+        "hall",
+        "keyframe",
+        "cycles"
+      ]
+    },
+    {
+      "assetId": "adi-05-vyasa-line-env",
+      "type": "model",
+      "path": "assets/models/adi-05-vyasa-line.glb",
+      "source": "blender-v1",
+      "version": "0.3.0",
+      "optimizationStatus": "optimized",
+      "tags": [
+        "chamber",
+        "cradle",
+        "sage",
+        "glb",
+        "draco"
+      ]
+    },
+    {
+      "assetId": "adi-05-vyasa-line-keyframe",
+      "type": "image",
+      "path": "assets/renders/adi-05-vyasa-line.jpg",
+      "source": "blender-v1",
+      "version": "0.3.0",
+      "optimizationStatus": "optimized",
+      "tags": [
+        "chamber",
+        "cradle",
+        "sage",
+        "keyframe",
+        "cycles"
+      ]
+    },
+    {
+      "assetId": "adi-06-births-env",
+      "type": "model",
+      "path": "assets/models/adi-06-births.glb",
+      "source": "blender-v1",
+      "version": "0.3.0",
+      "optimizationStatus": "optimized",
+      "tags": [
+        "garden",
+        "river",
+        "basket",
+        "glb",
+        "draco"
+      ]
+    },
+    {
+      "assetId": "adi-06-births-keyframe",
+      "type": "image",
+      "path": "assets/renders/adi-06-births.jpg",
+      "source": "blender-v1",
+      "version": "0.3.0",
+      "optimizationStatus": "optimized",
+      "tags": [
+        "garden",
+        "river",
+        "basket",
+        "keyframe",
+        "cycles"
+      ]
+    },
+    {
+      "assetId": "adi-07-drona-env",
+      "type": "model",
+      "path": "assets/models/adi-07-drona.glb",
+      "source": "blender-v1",
+      "version": "0.3.0",
+      "optimizationStatus": "optimized",
+      "tags": [
+        "arrows",
+        "training",
+        "range",
+        "glb",
+        "draco"
+      ]
+    },
+    {
+      "assetId": "adi-07-drona-keyframe",
+      "type": "image",
+      "path": "assets/renders/adi-07-drona.jpg",
+      "source": "blender-v1",
+      "version": "0.3.0",
+      "optimizationStatus": "optimized",
+      "tags": [
+        "arrows",
+        "training",
+        "range",
+        "keyframe",
+        "cycles"
+      ]
+    },
+    {
+      "assetId": "adi-08-lakshagriha-env",
+      "type": "model",
+      "path": "assets/models/adi-08-lakshagriha.glb",
+      "source": "blender-v1",
+      "version": "0.3.0",
+      "optimizationStatus": "optimized",
+      "tags": [
+        "fire",
+        "palace",
+        "night",
+        "glb",
+        "draco"
+      ]
+    },
+    {
+      "assetId": "adi-08-lakshagriha-keyframe",
+      "type": "image",
+      "path": "assets/renders/adi-08-lakshagriha.jpg",
+      "source": "blender-v1",
+      "version": "0.3.0",
+      "optimizationStatus": "optimized",
+      "tags": [
+        "fire",
+        "palace",
+        "night",
+        "keyframe",
+        "cycles"
+      ]
+    },
+    {
+      "assetId": "adi-09-hidimba-env",
+      "type": "model",
+      "path": "assets/models/adi-09-hidimba.glb",
+      "source": "blender-v1",
+      "version": "0.3.0",
+      "optimizationStatus": "optimized",
+      "tags": [
+        "forest",
+        "eyes",
+        "night",
+        "glb",
+        "draco"
+      ]
+    },
+    {
+      "assetId": "adi-09-hidimba-keyframe",
+      "type": "image",
+      "path": "assets/renders/adi-09-hidimba.jpg",
+      "source": "blender-v1",
+      "version": "0.3.0",
+      "optimizationStatus": "optimized",
+      "tags": [
+        "forest",
+        "eyes",
+        "night",
+        "keyframe",
+        "cycles"
+      ]
+    },
+    {
+      "assetId": "adi-10-swayamvara-env",
+      "type": "model",
+      "path": "assets/models/adi-10-swayamvara.glb",
+      "source": "blender-v1",
+      "version": "0.3.0",
+      "optimizationStatus": "optimized",
+      "tags": [
+        "target",
+        "bow",
+        "hall",
+        "glb",
+        "draco"
+      ]
+    },
+    {
+      "assetId": "adi-10-swayamvara-keyframe",
+      "type": "image",
+      "path": "assets/renders/adi-10-swayamvara.jpg",
+      "source": "blender-v1",
+      "version": "0.3.0",
+      "optimizationStatus": "optimized",
+      "tags": [
+        "target",
+        "bow",
+        "hall",
+        "keyframe",
+        "cycles"
+      ]
+    },
+    {
+      "assetId": "adi-11-division-env",
+      "type": "model",
+      "path": "assets/models/adi-11-division.glb",
+      "source": "blender-v1",
+      "version": "0.3.0",
+      "optimizationStatus": "optimized",
+      "tags": [
+        "map",
+        "crown",
+        "rift",
+        "glb",
+        "draco"
+      ]
+    },
+    {
+      "assetId": "adi-11-division-keyframe",
+      "type": "image",
+      "path": "assets/renders/adi-11-division.jpg",
+      "source": "blender-v1",
+      "version": "0.3.0",
+      "optimizationStatus": "optimized",
+      "tags": [
+        "map",
+        "crown",
+        "rift",
+        "keyframe",
+        "cycles"
+      ]
+    },
+    {
+      "assetId": "adi-12-indraprastha-env",
+      "type": "model",
+      "path": "assets/models/adi-12-indraprastha.glb",
+      "source": "blender-v1",
+      "version": "0.3.0",
+      "optimizationStatus": "optimized",
+      "tags": [
+        "city",
+        "sunrise",
+        "palace",
+        "glb",
+        "draco"
+      ]
+    },
+    {
+      "assetId": "adi-12-indraprastha-keyframe",
+      "type": "image",
+      "path": "assets/renders/adi-12-indraprastha.jpg",
+      "source": "blender-v1",
+      "version": "0.3.0",
+      "optimizationStatus": "optimized",
+      "tags": [
+        "city",
+        "sunrise",
+        "palace",
+        "keyframe",
+        "cycles"
+      ]
+    },
+    {
+      "assetId": "char-sage",
+      "type": "model",
+      "path": "assets/models/characters/sage.glb",
+      "source": "blender-chars-v1",
+      "version": "0.4.0",
+      "optimizationStatus": "optimized",
+      "tags": [
+        "sage",
+        "Vyasa",
+        "Sauti",
+        "Astika",
+        "Vidura",
+        "Durvasa",
+        "glb",
+        "draco",
+        "toon"
+      ]
+    },
+    {
+      "assetId": "char-warrior",
+      "type": "model",
+      "path": "assets/models/characters/warrior.glb",
+      "source": "blender-chars-v1",
+      "version": "0.4.0",
+      "optimizationStatus": "optimized",
+      "tags": [
+        "warrior",
+        "Bhishma",
+        "Arjuna",
+        "Bhima",
+        "Krishna",
+        "Yudhishthira",
+        "glb",
+        "draco",
+        "toon"
+      ]
+    },
+    {
+      "assetId": "char-princess",
+      "type": "model",
+      "path": "assets/models/characters/princess.glb",
+      "source": "blender-chars-v1",
+      "version": "0.4.0",
+      "optimizationStatus": "optimized",
+      "tags": [
+        "princess",
+        "Ganga",
+        "Satyavati",
+        "Kunti",
+        "Draupadi",
+        "Hidimbi",
+        "glb",
+        "draco",
+        "toon"
+      ]
+    },
+    {
+      "assetId": "char-king",
+      "type": "model",
+      "path": "assets/models/characters/king.glb",
+      "source": "blender-chars-v1",
+      "version": "0.4.0",
+      "optimizationStatus": "optimized",
+      "tags": [
+        "king",
+        "Shantanu",
+        "Janamejaya",
+        "Dhritarashtra",
+        "glb",
+        "draco",
+        "toon"
+      ]
+    }
+  ]
+}

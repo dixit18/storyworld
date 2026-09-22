@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Storyworld — Seam Editor (Ch.01)</title>
+    <style>
+      body { font-family: Georgia, serif; background: #0c0f14; color: #f5f0e1; margin: 0; padding: 20px; }
+      h1 { color: #c9a227; }
+      table { border-collapse: collapse; width: 100%; background: #141926; }
+      th, td { border: 1px solid #333; padding: 8px; text-align: left; font-size: 14px; }
+      th { color: #c9a227; }
+      input, select { background: #0c0f14; color: #f5f0e1; border: 1px solid #444; border-radius: 6px; padding: 6px; width: 100%; }
+      input[type="number"] { width: 80px; }
+      #status { margin: 12px 0; padding: 10px; border-radius: 8px; background: #141926; border: 1px solid #333; }
+      #status.bad { border-color: #b3372f; }
+      #status.good { border-color: #4a7c3a; }
+      button.primary { background: #c9a227; color: #14100a; border: 0; border-radius: 8px; padding: 8px 14px; cursor: pointer; margin-top: 12px; }
+    </style>
+  </head>
+  <body>
+    <h1>Seam Editor — Adi Parva transitions</h1>
+    <p>Edit zoom seams. The loop must close back to the entry scene. Export downloads <code>transitions.json</code>.</p>
+    <div id="status" role="status">Loading…</div>
+    <table aria-label="Transitions">
+      <thead><tr><th>From</th><th>To</th><th>Type</th><th>Seconds</th><th>Loop</th></tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+    <button class="primary" id="export" type="button">Export transitions.json</button>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

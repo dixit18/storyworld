@@ -1,0 +1,17 @@
+{
+  "packageId": "mahabharata-chapter-01-adi-parva",
+  "storyId": "mahabharata",
+  "chapterId": "chapter-01-adi-parva",
+  "version": "0.3.0",
+  "entrySceneId": "adi-01-naimisha",
+  "sceneGraphPath": "scene_graph.json",
+  "worldBiblePath": "world_bible.json",
+  "assetsManifestPath": "assets_manifest.json",
+  "audioManifestPath": "audio_manifest.json",
+  "transitionsPath": "transitions.json",
+  "buildInfo": {
+    "buildDate": "2026-09-21",
+    "generatorVersion": "storyworld-0.4.0",
+    "assetVersion": "blender-v2"
+  }
+}

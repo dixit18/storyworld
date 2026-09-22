@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Storyworld — Adi Parva Ch.01</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <main id="experience">
+      <canvas id="world" aria-label="Roamable 3D story world"></canvas>
+      <div id="vignette" aria-hidden="true"></div>
+      <div id="loader" class="visible" role="status">
+        <img id="poster" alt="Scene keyframe" />
+        <p id="loadmsg">Loading…</p>
+      </div>
+      <aside id="information" aria-live="polite">
+        <p id="kicker">Mahabharata · Adi Parva · a journey</p>
+        <h1 id="sceneTitle">Loading…</h1>
+        <p id="narration"></p>
+        <div id="dialogue">
+          <p id="speaker"></p>
+          <p id="line"></p>
+        </div>
+        <div id="journey"><div id="journeybar"></div></div>
+        <div id="controls">
+          <button id="pause" type="button">Pause</button>
+          <span id="speed" role="group" aria-label="Journey speed">
+            <button type="button" data-speed="0">Stop</button>
+            <button type="button" data-speed="0.5">0.5×</button>
+            <button type="button" data-speed="1">1×</button>
+            <button type="button" data-speed="2">2×</button>
+          </span>
+          <button id="voice" type="button">Voice: on</button>
+        </div>
+        <p id="progress"></p>
+        <p id="hint">The story moves on its own — drag to look around, WASD to roam, Space pauses.</p>
+      </aside>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

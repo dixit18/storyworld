@@ -1,0 +1,17 @@
+{
+  "packageId": "string",
+  "storyId": "string",
+  "chapterId": "string",
+  "version": "string",
+  "entrySceneId": "string",
+  "sceneGraphPath": "string",
+  "worldBiblePath": "string",
+  "assetsManifestPath": "string",
+  "audioManifestPath": "string",
+  "transitionsPath": "string",
+  "buildInfo": {
+    "buildDate": "string",
+    "generatorVersion": "string",
+    "assetVersion": "string"
+  }
+}

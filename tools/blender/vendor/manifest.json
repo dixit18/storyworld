@@ -1,0 +1,56 @@
+{
+  "hdris": {
+    "spruit_sunrise": {
+      "file": "vendor\\hdris\\spruit_sunrise.hdr",
+      "url": "https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/spruit_sunrise_1k.hdr"
+    },
+    "kloppenheim_06_puresky": {
+      "file": "vendor\\hdris\\kloppenheim_06_puresky.hdr",
+      "url": "https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/kloppenheim_06_puresky_1k.hdr"
+    },
+    "kiara_9_dusk": {
+      "file": "vendor\\hdris\\kiara_9_dusk.hdr",
+      "url": "https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/kiara_9_dusk_1k.hdr"
+    },
+    "qwantani_night_puresky": {
+      "file": "vendor\\hdris\\qwantani_night_puresky.hdr",
+      "url": "https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/qwantani_night_puresky_1k.hdr"
+    },
+    "brown_photostudio_02": {
+      "file": "vendor\\hdris\\brown_photostudio_02.hdr",
+      "url": "https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/brown_photostudio_02_1k.hdr"
+    }
+  },
+  "textures": {
+    "bark_brown_01": {
+      "Diffuse": "vendor\\textures\\bark_brown_01_diffuse_1k.jpg",
+      "nor_gl": "vendor\\textures\\bark_brown_01_nor_gl_1k.jpg",
+      "Rough": "vendor\\textures\\bark_brown_01_rough_1k.jpg",
+      "AO": "vendor\\textures\\bark_brown_01_ao_1k.jpg"
+    },
+    "forest_ground_04": {
+      "Diffuse": "vendor\\textures\\forest_ground_04_diffuse_1k.jpg",
+      "nor_gl": "vendor\\textures\\forest_ground_04_nor_gl_1k.jpg",
+      "Rough": "vendor\\textures\\forest_ground_04_rough_1k.jpg",
+      "AO": "vendor\\textures\\forest_ground_04_ao_1k.jpg"
+    },
+    "stone_wall_05": {
+      "Diffuse": "vendor\\textures\\stone_wall_05_diffuse_1k.jpg",
+      "nor_gl": "vendor\\textures\\stone_wall_05_nor_gl_1k.jpg",
+      "Rough": "vendor\\textures\\stone_wall_05_rough_1k.jpg",
+      "AO": "vendor\\textures\\stone_wall_05_ao_1k.jpg"
+    },
+    "marble_01": {
+      "Diffuse": "vendor\\textures\\marble_01_diffuse_1k.jpg",
+      "nor_gl": "vendor\\textures\\marble_01_nor_gl_1k.jpg",
+      "Rough": "vendor\\textures\\marble_01_rough_1k.jpg",
+      "AO": "vendor\\textures\\marble_01_ao_1k.jpg"
+    },
+    "oak_wood_planks": {
+      "Diffuse": "vendor\\textures\\oak_wood_planks_diffuse_1k.jpg",
+      "nor_gl": "vendor\\textures\\oak_wood_planks_nor_gl_1k.jpg",
+      "Rough": "vendor\\textures\\oak_wood_planks_rough_1k.jpg",
+      "AO": "vendor\\textures\\oak_wood_planks_ao_1k.jpg"
+    }
+  }
+}
