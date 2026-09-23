@@ -20,6 +20,7 @@ export class Engine {
   private keys = new Set<string>();
   private current: THREE.Group | null = null;
   private updater: (t: number, dt: number) => void = () => {};
+  private shared = new WeakSet<object>();
   private last = performance.now();
   idleAutoRotate = true;
   private lastInteract = performance.now();
@@ -99,15 +100,31 @@ export class Engine {
     this.lastInteract = performance.now();
   }
 
+  /** Mark a reusable template (cached characters) so disposal skips its GPU assets. */
+  markShared(root: THREE.Object3D) {
+    root.traverse((o) => {
+      const mesh = o as THREE.Mesh;
+      if (!mesh.isMesh) return;
+      this.shared.add(mesh.geometry);
+      const m = mesh.material as THREE.Material | THREE.Material[];
+      (Array.isArray(m) ? m : [m]).forEach((x) => this.shared.add(x));
+    });
+  }
+
   setEnvironment(env: EnvResult, bg: number, fogNear: number, fogFar: number) {
     if (this.current) {
       this.scene.remove(this.current);
       this.current.traverse((o) => {
         const mesh = o as THREE.Mesh;
         if (mesh.isMesh || (o as THREE.Points).isPoints) {
-          (mesh.geometry as THREE.BufferGeometry).dispose();
+          const geo = mesh.geometry as THREE.BufferGeometry;
+          if (!this.shared.has(geo)) {
+            geo.dispose();
+          }
           const m = (mesh.material as THREE.Material | THREE.Material[]);
-          (Array.isArray(m) ? m : [m]).forEach((x) => x.dispose());
+          (Array.isArray(m) ? m : [m]).forEach((x) => {
+            if (!this.shared.has(x)) x.dispose();
+          });
         }
       });
     }

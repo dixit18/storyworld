@@ -605,44 +605,6 @@
       ]
     },
     {
-      "assetId": "char-sage",
-      "type": "model",
-      "path": "assets/models/characters/sage.glb",
-      "source": "blender-chars-v2",
-      "version": "0.5.0",
-      "optimizationStatus": "optimized",
-      "tags": [
-        "sage",
-        "Vyasa",
-        "Sauti",
-        "Astika",
-        "Vidura",
-        "Durvasa",
-        "glb",
-        "draco",
-        "toon"
-      ]
-    },
-    {
-      "assetId": "char-warrior",
-      "type": "model",
-      "path": "assets/models/characters/warrior.glb",
-      "source": "blender-chars-v2",
-      "version": "0.5.0",
-      "optimizationStatus": "optimized",
-      "tags": [
-        "warrior",
-        "Bhishma",
-        "Arjuna",
-        "Bhima",
-        "Krishna",
-        "Yudhishthira",
-        "glb",
-        "draco",
-        "toon"
-      ]
-    },
-    {
       "assetId": "char-princess",
       "type": "model",
       "path": "assets/models/characters/princess.glb",
@@ -662,35 +624,109 @@
       ]
     },
     {
-      "assetId": "char-king",
+      "assetId": "cast-sage",
       "type": "model",
-      "path": "assets/models/characters/king.glb",
-      "source": "blender-chars-v2",
+      "path": "assets/models/cast/sage.glb",
+      "source": "quaternius-cc0",
       "version": "0.5.0",
       "optimizationStatus": "optimized",
       "tags": [
-        "king",
-        "Shantanu",
-        "Janamejaya",
-        "Dhritarashtra",
+        "Wizard",
+        "staff",
+        "robe",
+        "sage",
+        "Vyasa",
+        "Sauti",
+        "Astika",
+        "Vidura",
+        "Durvasa",
+        "Drona",
         "glb",
-        "draco",
-        "toon"
+        "rigged",
+        "animated"
       ]
     },
     {
-      "assetId": "char-strongman",
+      "assetId": "cast-warrior",
       "type": "model",
-      "path": "assets/models/characters/strongman.glb",
-      "source": "blender-chars-v2",
+      "path": "assets/models/cast/warrior.glb",
+      "source": "quaternius-cc0",
       "version": "0.5.0",
       "optimizationStatus": "optimized",
       "tags": [
+        "Warrior",
+        "sword",
+        "Bhishma",
+        "Krishna",
+        "Yudhishthira",
         "glb",
-        "draco",
-        "toon",
+        "rigged",
+        "animated"
+      ]
+    },
+    {
+      "assetId": "cast-king",
+      "type": "model",
+      "path": "assets/models/cast/king.glb",
+      "source": "quaternius-cc0",
+      "version": "0.5.0",
+      "optimizationStatus": "optimized",
+      "tags": [
+        "Cleric",
+        "king",
+        "Janamejaya",
+        "Shantanu",
+        "Dhritarashtra",
+        "glb",
+        "rigged",
+        "animated"
+      ]
+    },
+    {
+      "assetId": "cast-strongman",
+      "type": "model",
+      "path": "assets/models/cast/strongman.glb",
+      "source": "quaternius-cc0",
+      "version": "0.5.0",
+      "optimizationStatus": "optimized",
+      "tags": [
+        "Monk",
+        "Bhima",
         "strongman",
-        "Bhima"
+        "glb",
+        "rigged",
+        "animated"
+      ]
+    },
+    {
+      "assetId": "cast-ranger",
+      "type": "model",
+      "path": "assets/models/cast/ranger.glb",
+      "source": "quaternius-cc0",
+      "version": "0.5.0",
+      "optimizationStatus": "optimized",
+      "tags": [
+        "Ranger",
+        "bow",
+        "Arjuna",
+        "glb",
+        "rigged",
+        "animated"
+      ]
+    },
+    {
+      "assetId": "cast-rogue",
+      "type": "model",
+      "path": "assets/models/cast/rogue.glb",
+      "source": "quaternius-cc0",
+      "version": "0.5.0",
+      "optimizationStatus": "optimized",
+      "tags": [
+        "Rogue",
+        "spare",
+        "glb",
+        "rigged",
+        "animated"
       ]
     }
   ]

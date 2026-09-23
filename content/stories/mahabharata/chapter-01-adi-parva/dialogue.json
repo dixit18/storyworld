@@ -169,7 +169,7 @@
       },
       {
         "char": "Arjuna",
-        "arch": "warrior",
+        "arch": "ranger",
         "line": "Master, my fee will be your honor itself. I will pay it."
       }
     ],
@@ -205,7 +205,7 @@
       },
       {
         "char": "Arjuna",
-        "arch": "warrior",
+        "arch": "ranger",
         "line": "I bent it as a Brahmin boy. Let the kings whisper \u2014 the fish has fallen."
       }
     ],
@@ -229,7 +229,7 @@
       },
       {
         "char": "Arjuna",
-        "arch": "warrior",
+        "arch": "ranger",
         "line": "Then let this ending be a seed, Krishna \u2014 as every ending is."
       }
     ]

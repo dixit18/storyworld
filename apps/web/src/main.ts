@@ -4,6 +4,7 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
+import { clone as skeletonClone } from 'three/examples/jsm/utils/SkeletonUtils.js';
 import { Engine, type EnvResult } from './engine';
 import { BUILDERS } from './world';
 import {
@@ -75,12 +76,12 @@ const CAST: Record<string, CastMember[]> = {
   'adi-04-bhishma-vow': [{ arch: 'warrior', char: 'Bhishma', x: -2, z: 10, s: 1.15 }, { arch: 'king', char: 'Shantanu', x: 2.5, z: 10.5, s: 1 }],
   'adi-05-vyasa-line': [{ arch: 'sage', char: 'Vyasa', x: -1.5, z: 0, s: 1.1 }, { arch: 'princess', char: 'Satyavati', x: 2, z: 0.5, s: 1 }],
   'adi-06-births': [{ arch: 'princess', char: 'Kunti', x: -6, z: -10, s: 1 }, { arch: 'sage', char: 'Durvasa', x: -2.5, z: -9, s: 1 }],
-  'adi-07-drona': [{ arch: 'sage', char: 'Drona', x: 3, z: 6, s: 1.05 }, { arch: 'warrior', char: 'Arjuna', x: -1, z: 7, s: 1 }],
+  'adi-07-drona': [{ arch: 'sage', char: 'Drona', x: 3, z: 6, s: 1.05 }, { arch: 'ranger', char: 'Arjuna', x: -1, z: 7, s: 1 }],
   'adi-08-lakshagriha': [{ arch: 'warrior', char: 'Yudhishthira', x: -2, z: 2, s: 0.95 }, { arch: 'sage', char: 'Vidura', x: 2, z: 2.5, s: 1 }],
   'adi-09-hidimba': [{ arch: 'strongman', char: 'Bhima', x: -2, z: 4, s: 1.25 }, { arch: 'princess', char: 'Hidimbi', x: 2, z: 4.5, s: 1 }],
-  'adi-10-swayamvara': [{ arch: 'princess', char: 'Draupadi', x: 0, z: 0, s: 1.05 }, { arch: 'warrior', char: 'Arjuna', x: 3.5, z: 0.5, s: 1 }],
+  'adi-10-swayamvara': [{ arch: 'princess', char: 'Draupadi', x: 0, z: 0, s: 1.05 }, { arch: 'ranger', char: 'Arjuna', x: 3.5, z: 0.5, s: 1 }],
   'adi-11-division': [{ arch: 'king', char: 'Dhritarashtra', x: -3, z: 0, s: 1.1 }, { arch: 'warrior', char: 'Yudhishthira', x: 3, z: 0.5, s: 1 }],
-  'adi-12-indraprastha': [{ arch: 'warrior', char: 'Krishna', x: 0, z: 4, s: 1 }, { arch: 'warrior', char: 'Arjuna', x: 3, z: 4.5, s: 0.95 }],
+  'adi-12-indraprastha': [{ arch: 'warrior', char: 'Krishna', x: 0, z: 4, s: 1 }, { arch: 'ranger', char: 'Arjuna', x: 3, z: 4.5, s: 0.95 }],
 };
 
 interface Line { char: string; arch: string; line: string }
@@ -280,22 +281,26 @@ async function main() {
   const gltf = new GLTFLoader();
   gltf.setDRACOLoader(draco);
 
-  // Character archetype cache: load once, clone per placement.
-  const charCache = new Map<string, THREE.Group>();
-  async function getChar(arch: string): Promise<THREE.Group | null> {
+  // Character archetype cache: Quaternius CC0 heroes (rigged + idle) for males,
+  // our toon princess for female roles. Templates are shared; placements clone.
+  const charCache = new Map<string, { group: THREE.Group; clips: THREE.AnimationClip[] }>();
+  async function getChar(arch: string): Promise<{ group: THREE.Group; clips: THREE.AnimationClip[] } | null> {
     if (!charCache.has(arch)) {
       try {
-        const loaded = await gltf.loadAsync(`./package/assets/models/characters/${arch}.glb`);
+        const url = arch === 'princess'
+          ? './package/assets/models/characters/princess.glb'
+          : `./package/assets/models/cast/${arch}.glb`;
+        const loaded = await gltf.loadAsync(url);
         const g = loaded.scene as THREE.Group;
-        toonify(g);
-        charCache.set(arch, g);
+        if (arch === 'princess') toonify(g);
+        engine.markShared(g);
+        charCache.set(arch, { group: g, clips: loaded.animations ?? [] });
       } catch (e) {
         console.warn('character missing:', arch, e);
         return null;
       }
     }
-    const tpl = charCache.get(arch);
-    return tpl ? tpl.clone() as THREE.Group : null;
+    return charCache.get(arch) ?? null;
   }
 
   let index = 0; // journey order = scene order
@@ -317,8 +322,8 @@ async function main() {
     engine.idleAutoRotate = !paused && speed === 0;
   }
 
-  // Speaking character groups, for bubble anchoring.
-  const speakers = new Map<string, THREE.Group>();
+  // Speaking character groups + bubble heights, for bubble anchoring.
+  const speakers = new Map<string, { g: THREE.Group; h: number }>();
 
   async function enterScene(i: number) {
     index = i;
@@ -347,18 +352,26 @@ async function main() {
       group.add(fallback.env.group);
       update = fallback.env.update;
     }
-    // Cast: toon characters placed around the story heart, facing the arrival.
+    // Cast: rigged heroes placed around the story heart, facing the arrival,
+    // idle animation running.
     const camArrive = new THREE.Vector3(...st.spawn.pos);
     speakers.clear();
+    const mixers: THREE.AnimationMixer[] = [];
     for (const c of CAST[sceneId] ?? []) {
-      const ch = await getChar(c.arch);
-      if (!ch) continue;
-      ch.position.set(c.x, 0.45, c.z);
+      const tpl = await getChar(c.arch);
+      if (!tpl) continue;
+      const ch = skeletonClone(tpl.group) as THREE.Group;
+      ch.position.set(c.x, 0, c.z);
       ch.scale.setScalar(c.s);
-      ch.lookAt(camArrive.x, 0.45, camArrive.z);
-      ch.rotateY(Math.PI); // models face -Z; turn them toward camera
+      ch.lookAt(camArrive.x, 0, camArrive.z);
+      const idle = tpl.clips.find((a) => /idle/i.test(a.name)) ?? tpl.clips[0];
+      if (idle) {
+        const mixer = new THREE.AnimationMixer(ch);
+        mixer.clipAction(idle).play();
+        mixers.push(mixer);
+      }
       group.add(ch);
-      speakers.set(c.char, ch);
+      speakers.set(c.char, { g: ch, h: c.arch === 'princess' ? 2.9 : 2.5 });
     }
     group.add(bubble.sprite);
     bubble.hide();
@@ -373,6 +386,7 @@ async function main() {
         });
         update(t, dt);
         extraUpdate(t, dt);
+        for (const m of mixers) m.update(dt);
         // Journey flight: drift camera + target forward along the dolly vector.
         if (speed > 0 && !paused && !journeyDone) {
           const seg = flightSeg(sceneId);
@@ -421,8 +435,8 @@ async function main() {
       lineIdx = li;
       const who = speakers.get(ls[li].char);
       if (who) {
-        bubble.sprite.position.copy(who.position);
-        bubble.sprite.position.y += 2.9 * who.scale.x;
+        bubble.sprite.position.copy(who.g.position);
+        bubble.sprite.position.y += who.h * who.g.scale.x;
         bubble.show(ls[li].char, ls[li].line);
       } else {
         bubble.hide();
