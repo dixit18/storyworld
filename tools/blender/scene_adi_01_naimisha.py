@@ -1,4 +1,5 @@
-"""adi-01 Naimisha forest at night: fire circle, listening sages, moon, dense ring.
+"""adi-01 Naimisha forest at night, COZY STORY-CIRCLE pilot.
+Tight sage ring around a strong fire, dense tree-wall backdrop, close camera.
 Coords are Blender-native: X right, Y forward(depth), Z up.
 """
 import math
@@ -21,14 +22,14 @@ SID = 'adi-01-naimisha'
 
 print('GPU:', use_gpu())
 clean_scene()
-setup_cycles(gpu=True, samples=96)
+setup_cycles(gpu=True, samples=128)
 setup_view()
-sky_gradient(horizon=(0.10, 0.20, 0.24), mid=(0.07, 0.13, 0.20), zenith=(0.02, 0.04, 0.10),
+sky_gradient(horizon=(0.10, 0.19, 0.24), mid=(0.06, 0.12, 0.19), zenith=(0.02, 0.04, 0.10),
              below=(0.01, 0.02, 0.03))
-sun_light('GEO-moonlight', energy=0.7, location=(-30, -40, 50))
+sun_light('GEO-moonlight', energy=1.1, location=(-30, -40, 50))
 
 MAT = {
-    'ground': principled('MAT-ground', base=(0.05, 0.11, 0.08, 1.0), roughness=1.0),
+    'ground': principled('MAT-ground', base=(0.10, 0.075, 0.055, 1.0), roughness=1.0),
     'stone': principled('MAT-stone', base=(0.35, 0.35, 0.34, 1.0), roughness=0.9),
     'wood': principled('MAT-wood', base=(0.25, 0.16, 0.10, 1.0), roughness=0.9),
     'leaf': principled('MAT-leaf', base=(0.04, 0.16, 0.10, 1.0), roughness=1.0),
@@ -49,26 +50,36 @@ gr.name = 'GEO-ground'
 gr.scale = (150, 150, 1)
 gr.data.materials.append(MAT['ground'])
 
-# tree ring (clear center + camera corridor around x=2..11, y=8..16)
+# tree WALL (dense backdrop ring, close) + far silhouettes.
+# Clearing d<11; camera corridor around x=2..11, y=5..12 (close camera).
 trunk_me, canopy_me = tree_kit()
 placed = 0
 tries = 0
-while placed < 64 and tries < 400:
+while placed < 30 and tries < 400:
     tries += 1
     a = rnd.random() * 2 * math.pi
-    d = 11 + rnd.random() * 55
+    d = 13 + rnd.random() * 7
     x, y = math.cos(a) * d, math.sin(a) * d
-    if 0 < x < 14 and 6 < y < 18:
+    if 0 < x < 13 and 3 < y < 14:
         continue
-    tree_at(trunk_me, canopy_me, MAT['trunk'], MAT['leaf'], x, y, 0.9 + rnd.random() * 1.1)
+    tree_at(trunk_me, canopy_me, MAT['trunk'], MAT['leaf'], x, y, 1.3 + rnd.random() * 0.6)
+    placed += 1
+placed = 0
+tries = 0
+while placed < 42 and tries < 400:
+    tries += 1
+    a = rnd.random() * 2 * math.pi
+    d = 26 + rnd.random() * 34
+    x, y = math.cos(a) * d, math.sin(a) * d
+    tree_at(trunk_me, canopy_me, MAT['trunk'], MAT['leaf'], x, y, 1.0 + rnd.random() * 1.0)
     placed += 1
 
-# hero fire + sage circle
-fire_pit('GEO-hero-fire', 0, 0, 1.1, MAT['stone'], MAT['wood'], MAT['flame'], MAT['core'], light_energy=300.0)
+# hero fire + TIGHT sage circle
+fire_pit('GEO-hero-fire', 0, 0, 1.1, MAT['stone'], MAT['wood'], MAT['flame'], MAT['core'], light_energy=420.0)
 for i in range(8):
     a = (i / 8) * 2 * math.pi + 0.2
-    sx, sy = math.cos(a) * 4.4, math.sin(a) * 4.4
-    bpy.ops.mesh.primitive_cylinder_add(radius=0.35, depth=2.2, location=(sx, sy, 0.35))
+    sx, sy = math.cos(a) * 3.2, math.sin(a) * 3.2
+    bpy.ops.mesh.primitive_cylinder_add(radius=0.3, depth=1.3, location=(sx, sy, 0.3))
     seat = bpy.context.active_object
     seat.name = f'GEO-seat{i}'
     seat.rotation_euler = (0, math.pi / 2, -a)
@@ -93,16 +104,16 @@ for i in range(44):
     if not o.data.materials:
         o.data.materials.append(MAT['firefly'])
 
-# camera
-bpy.ops.object.camera_add(location=(11, 15, 3.6))
+# camera: CLOSE, over a sage's shoulder into the fire + Sauti beyond
+bpy.ops.object.camera_add(location=(6.5, 8.5, 2.6))
 cam = bpy.context.active_object
 cam.name = 'CAM-hero'
 cam.data.lens = 40
-aim_camera(cam, (0, -2, 1.6))
+aim_camera(cam, (0, 0, 1.4))
 bpy.context.scene.camera = cam
 bpy.context.view_layer.update()
-frame_check(cam, [('fire', (0, 0, 1.2)), ('sage-far', (-4.4, -0.9, 1.2)),
-                  ('moon', (-70, -90, 80)), ('trees-back', (0, -30, 4))])
+frame_check(cam, [('fire', (0, 0, 1.2)), ('sage-near', (2.4, 2.1, 1.2)),
+                  ('moon', (-70, -90, 80)), ('tree-wall', (0, -16, 5))])
 
 scene = bpy.context.scene
 scene.render.filepath = os.path.join(CH, 'renders', f'{SID}.png')

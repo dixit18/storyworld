@@ -37,6 +37,9 @@ def make_blob(seed):
 
 for bf in sorted(glob.glob(os.path.join(CH, 'blend', 'adi-*.blend'))):
     name = os.path.splitext(os.path.basename(bf))[0]
+    only = os.environ.get('ONLY')
+    if only and name != only:
+        continue
     bpy.ops.wm.open_mainfile(filepath=bf)
     canopies = [o for o in bpy.data.objects if o.name.startswith('GEO-tree-canopy')]
     if not canopies:

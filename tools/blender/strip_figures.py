@@ -15,6 +15,9 @@ PATS = ('sage', 'priest', 'vyasa', 'drona', 'arjuna', 'guest', 'kaurava', 'panda
 
 for bf in sorted(glob.glob(os.path.join(CH, 'blend', 'adi-*.blend'))):
     name = os.path.splitext(os.path.basename(bf))[0]
+    only = os.environ.get('ONLY')
+    if only and name != only:
+        continue
     bpy.ops.wm.open_mainfile(filepath=bf)
     doomed = [o for o in bpy.data.objects
               if o.name.startswith('GEO-') and any(p in o.name.lower() for p in PATS)]

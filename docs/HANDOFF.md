@@ -53,3 +53,6 @@ characters speak the scene's dialogue (TTS), with pause / 0.5× / 1× / 2× paci
   orange; soft-glow particle sprites; night hemi/exposure lift; official
   Blender MCP page + ahujasid repo mined (Poly Haven/Poly Pizza/Rodin patterns
   noted, Rodin deferred); rebuilt + browser-verified scene 01.
+- S10 reference study (Shining/Lusion/Oat the Goat) at user's push + cozy
+  story-circle pilot on adi-01: tight ring, tree wall, close camera, Sauti
+  1.25x; browser-verified clean (hard-reload needed: preview caches GLBs).

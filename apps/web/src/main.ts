@@ -31,7 +31,7 @@ interface SceneStyle {
 
 // (Unchanged environment art direction — spawns double as journey waypoints.)
 const STYLE: Record<string, SceneStyle> = {
-  'adi-01-naimisha': { bg: 0x070d0a, fog: [25, 130], sky: [0x02040a, 0x0d1a24], exposure: 1.2, spawn: { pos: [8, 3.0, -11], target: [0, 1.6, 2] },
+  'adi-01-naimisha': { bg: 0x070d0a, fog: [14, 85], sky: [0x02040a, 0x0d1a24], exposure: 1.2, spawn: { pos: [5.5, 2.3, -7.5], target: [0, 1.4, 0] },
     hemi: { sky: 0x2a3a4a, ground: 0x0a0f0a, i: 0.7 }, sun: { color: 0x8fa8c8, i: 0.5, pos: [-30, 40, 30] },
     fires: [{ color: 0xff8c3a, i: 90, pos: [0, 2.5, 0] }], extras: 'embers' },
   'adi-02-snake-sacrifice': { bg: 0x120606, fog: [20, 110], sky: [0x0a0505, 0x2a0d0a], exposure: 1.2, spawn: { pos: [10, 4, -13], target: [0, 3, 2] },
@@ -72,7 +72,7 @@ const STYLE: Record<string, SceneStyle> = {
 interface CastMember { arch: string; char: string; x: number; z: number; s: number }
 // Cast placed near each scene's story heart; they turn to face the arriving camera.
 const CAST: Record<string, CastMember[]> = {
-  'adi-01-naimisha': [{ arch: 'sage', char: 'Sauti', x: -4, z: 6.5, s: 1 }, { arch: 'sage', char: 'Shaunaka', x: 4, z: 7, s: 0.95 }],
+  'adi-01-naimisha': [{ arch: 'sage', char: 'Sauti', x: -2.8, z: 5.2, s: 1.25 }, { arch: 'sage', char: 'Shaunaka', x: 3.0, z: 5.6, s: 1.1 }],
   'adi-02-snake-sacrifice': [{ arch: 'king', char: 'Janamejaya', x: -2.5, z: 5.5, s: 1.05 }, { arch: 'sage', char: 'Astika', x: 2.5, z: 6, s: 1 }],
   'adi-03-ganga': [{ arch: 'king', char: 'Shantanu', x: 3, z: 10, s: 1 }, { arch: 'princess', char: 'Ganga', x: 8.5, z: 11, s: 1 }],
   'adi-04-bhishma-vow': [{ arch: 'warrior', char: 'Bhishma', x: -2, z: 10, s: 1.15 }, { arch: 'king', char: 'Shantanu', x: 2.5, z: 10.5, s: 1 }],
