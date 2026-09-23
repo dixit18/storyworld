@@ -31,7 +31,7 @@ interface SceneStyle {
 
 // (Unchanged environment art direction — spawns double as journey waypoints.)
 const STYLE: Record<string, SceneStyle> = {
-  'adi-01-naimisha': { bg: 0x070d0a, fog: [14, 85], sky: [0x02040a, 0x0d1a24], exposure: 1.2, spawn: { pos: [7.5, 2.3, -6.0], target: [0, 1.4, 0] },
+  'adi-01-naimisha': { bg: 0x070d0a, fog: [14, 85], sky: [0x02040a, 0x0d1a24], exposure: 1.2, spawn: { pos: [5.0, 2.0, -4.5], target: [0, 1.4, 0] },
     hemi: { sky: 0x2a3a4a, ground: 0x0a0f0a, i: 0.7 }, sun: { color: 0x8fa8c8, i: 0.5, pos: [-30, 40, 30] },
     fires: [{ color: 0xff8c3a, i: 90, pos: [0, 2.5, 0] }], extras: 'embers' },
   'adi-02-snake-sacrifice': { bg: 0x120606, fog: [20, 110], sky: [0x0a0505, 0x2a0d0a], exposure: 1.2, spawn: { pos: [10, 4, -13], target: [0, 3, 2] },
@@ -70,6 +70,15 @@ const STYLE: Record<string, SceneStyle> = {
 };
 
 interface CastMember { arch: string; char: string; x: number; z: number; s: number }
+// Per-character cloth tints so same-archetype cast never reads as clones.
+// Colors are linear-space RGB triplets for MeshStandardMaterial.color.
+const VARIETY: Record<string, { dhoti?: [number, number, number]; shawl?: [number, number, number]; beard?: [number, number, number] }> = {
+  Sauti: { dhoti: [0.93, 0.88, 0.76], shawl: [0.78, 0.34, 0.12], beard: [0.82, 0.82, 0.80] },
+  Rishi: { dhoti: [0.95, 0.62, 0.22], shawl: [0.60, 0.26, 0.10], beard: [0.45, 0.43, 0.40] },
+  Shaunaka: { dhoti: [0.88, 0.82, 0.70], shawl: [0.55, 0.15, 0.08], beard: [0.90, 0.89, 0.86] },
+  Astika: { dhoti: [0.90, 0.85, 0.72], shawl: [0.30, 0.42, 0.22], beard: [0.82, 0.82, 0.80] },
+  Vyasa: { dhoti: [0.93, 0.88, 0.76], shawl: [0.72, 0.58, 0.20], beard: [0.55, 0.53, 0.50] },
+};
 // Cast placed near each scene's story heart; they turn to face the arriving camera.
 const CAST: Record<string, CastMember[]> = {
   'adi-01-naimisha': [{ arch: 'sage', char: 'Sauti', x: 3.0, z: 2.0, s: 1.25 }, { arch: 'sage', char: 'Rishi', x: 3.93, z: 3.17, s: 1.0 }, { arch: 'sage', char: 'Shaunaka', x: -3.0, z: -2.0, s: 1.1 }],
@@ -384,7 +393,7 @@ function makeFace(stern: boolean): {
 
 async function main() {
   // Bump when art changes so browsers stop serving stale GLBs/posters.
-  const CB = 'cb4';
+  const CB = 'cb5';
   const pkg: ChapterPackage = await loadChapterPackage('./package');
   const scenes = pkg.scenes;
   const dlg = await (await fetch('./package/dialogue.json')).json() as {
@@ -500,6 +509,9 @@ async function main() {
       ch.position.set(c.x, 0, c.z);
       ch.scale.setScalar(c.s);
       ch.lookAt(camArrive.x, 0, camArrive.z);
+      // Own-kit models are authored facing Blender +Y (= three -Z after Yup
+      // export); Quaternius face +Z. Flip ours so all face the arrival.
+      if (c.arch === 'sage') ch.rotateY(Math.PI);
       ch.userData.baseQuat = ch.quaternion.clone();
       ch.traverse((o) => { o.frustumCulled = false; });
       const idle = tpl.clips.find((a) => /idle/i.test(a.name)) ?? tpl.clips[0];
@@ -510,13 +522,34 @@ async function main() {
       }
       group.add(ch);
       speakers.set(c.char, { g: ch, h: c.arch === 'princess' ? 2.9 : 2.5 });
+      // Variety: per-character dhoti/shawl/beard tints (materials cloned per
+      // placement so the cached template stays pristine).
+      const vary = VARIETY[c.char];
+      if (vary) {
+        ch.traverse((o) => {
+          const mesh = o as THREE.Mesh;
+          if (!mesh.isMesh) return;
+          const m = mesh.material as THREE.MeshStandardMaterial;
+          const n = (m.name || '').toLowerCase();
+          const tint = n.includes('dhoti') ? vary.dhoti : n.includes('shawl') ? vary.shawl
+            : (n.includes('beard') || n.includes('mustache')) ? vary.beard : null;
+          if (tint) {
+            const cp = m.clone();
+            cp.color.setRGB(...tint);
+            mesh.material = cp;
+          }
+        });
+      }
       // Face: billboard features on the head, front (+Z after lookAt).
-      const face = makeFace(/warrior|king|bhishma|drona/i.test(`${c.arch} ${c.char}`));
-      const fy = (c.arch === 'princess' ? 1.9 : 1.62) * c.s;
-      face.sprite.scale.set(0.8 * c.s, 0.8 * c.s, 1);
-      face.sprite.position.set(0, fy, 0.26 * c.s);
-      ch.add(face.sprite);
-      faces.set(c.char, face);
+      // Skipped for our own sage (modeled face + bone-blink in its Idle).
+      if (c.arch !== 'sage') {
+        const face = makeFace(/warrior|king|bhishma|drona/i.test(`${c.arch} ${c.char}`));
+        const fy = (c.arch === 'princess' ? 1.9 : 1.62) * c.s;
+        face.sprite.scale.set(0.8 * c.s, 0.8 * c.s, 1);
+        face.sprite.position.set(0, fy, 0.26 * c.s);
+        ch.add(face.sprite);
+        faces.set(c.char, face);
+      }
     }
     group.add(bubble.sprite);
     bubble.hide();

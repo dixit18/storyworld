@@ -59,3 +59,6 @@ characters speak the scene's dialogue (TTS), with pause / 0.5× / 1× / 2× paci
 - S11 faces (billboard eyes/brows/talking mouth + blink), fill light, slim
   flame, cache-busting ?cb, ?freeze=1 staging hook, midpoint focus; fixed the
   vanishing-speaker bug (nod overwrote lookAt Euler .x -> PI-flip burial).
+- S12 user rejected robots+stickers outright: built own-kit toon Rishi
+  (chars_sage.py, 4.2k tris, Idle+blink) for all sage cast + VARIETY tints;
+  closer adi-01 spawn; verified three distinct faced sages in player.
