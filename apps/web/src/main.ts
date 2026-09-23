@@ -393,7 +393,7 @@ function makeFace(stern: boolean): {
 
 async function main() {
   // Bump when art changes so browsers stop serving stale GLBs/posters.
-  const CB = 'cb5';
+  const CB = 'cb6';
   const pkg: ChapterPackage = await loadChapterPackage('./package');
   const scenes = pkg.scenes;
   const dlg = await (await fetch('./package/dialogue.json')).json() as {
@@ -609,8 +609,8 @@ async function main() {
     if (!seg) {
       const st = STYLE[sceneId];
       const a = new THREE.Vector3(...st.spawn.pos);
-      const b = a.clone().lerp(new THREE.Vector3(...st.spawn.target), 0.18);
-      b.y += 2.0;
+      const b = a.clone().lerp(new THREE.Vector3(...st.spawn.target), 0.10);
+      b.y += 2.6;
       const dir = b.clone().sub(a);
       seg = { dir: dir.clone().normalize(), len: dir.length() };
       segCache.set(sceneId, seg);

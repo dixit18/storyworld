@@ -62,8 +62,8 @@ def bone_parent_all():
         bpy.ops.object.parent_set(type='BONE')
 
 
-def ball(r, loc, sx=1, sy=1, sz=1):
-    bpy.ops.mesh.primitive_uv_sphere_add(radius=r, segments=12, ring_count=8, location=loc)
+def ball(r, loc, sx=1, sy=1, sz=1, seg=12):
+    bpy.ops.mesh.primitive_uv_sphere_add(radius=r, segments=seg, ring_count=8, location=loc)
     o = bpy.context.active_object
     o.scale = (sx, sy, sz)
     bpy.ops.object.transform_apply(scale=True)
@@ -112,8 +112,8 @@ lidL = add_bone('lid.L', (0.085, 0.175, 1.79), (0.085, 0.20, 1.84), parent='head
 lidR = add_bone('lid.R', (-0.085, 0.175, 1.79), (-0.085, 0.20, 1.84), parent='head')
 for side, sx in (('L', 1), ('R', -1)):
     sh = add_bone(f'shoulder.{side}', (0.14 * sx, 0, 1.44), (0.26 * sx, 0, 1.44), parent='chest')
-    ua = add_bone(f'upperarm.{side}', (0.26 * sx, 0, 1.44), (0.28 * sx, 0, 1.14), parent=f'shoulder.{side}')
-    fa = add_bone(f'forearm.{side}', (0.28 * sx, 0, 1.14), (0.295 * sx, 0.02, 0.86), parent=f'upperarm.{side}')
+    ua = add_bone(f'upperarm.{side}', (0.26 * sx, 0, 1.44), (0.28 * sx, 0, 1.10), parent=f'shoulder.{side}')
+    fa = add_bone(f'forearm.{side}', (0.28 * sx, 0, 1.10), (0.295 * sx, 0.02, 0.82), parent=f'upperarm.{side}')
     add_bone(f'thigh.{side}', (0.11 * sx, 0, 0.95), (0.12 * sx, 0, 0.52))
     sn = add_bone(f'shin.{side}', (0.12 * sx, 0, 0.52), (0.12 * sx, 0.03, 0.10), parent=f'thigh.{side}')
 bpy.ops.object.mode_set(mode='OBJECT')
@@ -121,22 +121,21 @@ bpy.ops.object.mode_set(mode='OBJECT')
 # ---------- body (heights in world Z; character faces +Y) ----------
 # dhoti + border
 part('dhoti', MAT['dhoti'], 'hips') if False else None
-bpy.ops.mesh.primitive_cylinder_add(radius=0.30, depth=0.85, vertices=14, location=(0, 0, 0.55))
+bpy.ops.mesh.primitive_cylinder_add(radius=0.30, depth=0.85, vertices=18, location=(0, 0, 0.55))
 dh = part('GEO-dhoti', MAT['dhoti'], 'hips')
 bpy.ops.mesh.primitive_torus_add(major_radius=0.295, minor_radius=0.035, location=(0, 0, 0.93))
 part('GEO-dhoti-border', MAT['border'], 'hips')
 # torso (bare chest + sacred thread)
-bpy.ops.mesh.primitive_cylinder_add(radius=0.19, depth=0.55, vertices=12, location=(0, 0, 1.28))
+bpy.ops.mesh.primitive_cylinder_add(radius=0.19, depth=0.48, vertices=16, location=(0, 0, 1.24))
 part('GEO-torso', MAT['skin'], 'spine')
 bpy.ops.mesh.primitive_torus_add(major_radius=0.195, minor_radius=0.018, location=(0, 0, 1.36))
 th = part('GEO-thread', MAT['border'], 'spine')
 th.rotation_euler = (0, 0, 0.5)
-# shawl over left shoulder
-part('x', MAT['shawl']) if False else None
-bpy.ops.mesh.primitive_cube_add(size=1, location=(-0.20, -0.02, 1.22))
+# shawl over left shoulder: flattened vertical roll, no hard box edges
+bpy.ops.mesh.primitive_cylinder_add(radius=0.17, depth=0.44, vertices=14, location=(-0.17, -0.02, 1.22))
 sh = part('GEO-shawl', MAT['shawl'], 'chest')
-sh.scale = (0.16, 0.50, 0.42)
-sh.rotation_euler = (0, 0, 0.15)
+sh.scale = (0.55, 1.25, 1.0)
+sh.rotation_euler = (0, 0, 0.12)
 bpy.ops.object.transform_apply(location=False, rotation=True, scale=True)
 # rudraksha mala (hangs on the chest: ring plane faces forward)
 bpy.ops.mesh.primitive_torus_add(major_radius=0.12, minor_radius=0.025, location=(0, 0.095, 1.36))
@@ -153,7 +152,7 @@ for i, a in enumerate([0.5, 1.1, 2.0, 2.6, 3.6, 4.2, 5.1, 5.7]):
 
 # ---------- head + face (faces +Y) ----------
 part('hx', MAT['skin']) if False else None
-ball(0.21, (0, 0, 1.68))
+ball(0.21, (0, 0, 1.68), seg=16)
 part('GEO-head', MAT['skin'], 'head')
 # ears
 for sx in (1, -1):
@@ -210,14 +209,14 @@ part('GEO-knot-tie', MAT['border'], 'head')
 # ---------- limbs ----------
 for sx in (1, -1):
     side = 'L' if sx == 1 else 'R'
-    cyl(0.062, 0.32, (0.26 * sx, 0, 1.29))
+    cyl(0.062, 0.36, (0.26 * sx, 0, 1.27))
     part(f'GEO-upperarm{side}', MAT['skin'], f'upperarm.{side}')
     # armlet on right upper arm
     if sx == -1:
         bpy.ops.mesh.primitive_torus_add(major_radius=0.068, minor_radius=0.018,
                                          location=(0.26 * sx, 0, 1.36))
         part('GEO-armlet', MAT['border'], f'upperarm.{side}')
-    cyl(0.052, 0.30, (0.285 * sx, 0.01, 1.0))
+    cyl(0.052, 0.34, (0.285 * sx, 0.01, 0.98))
     part(f'GEO-forearm{side}', MAT['skin'], f'forearm.{side}')
     ball(0.06, (0.295 * sx, 0.02, 0.83))
     part(f'GEO-hand{side}', MAT['skin'], f'forearm.{side}')
@@ -310,13 +309,26 @@ scene.render.filepath = os.path.join(CH, 'renders', 'cast_sage.png')
 bpy.ops.render.render(write_still=True)
 print('RENDERED cast_sage.png')
 
-# ---------- export ----------
+# ---------- export (subsurf baked: smooth clay-toon, not faceted primitives) ----------
 bpy.ops.object.select_all(action='DESELECT')
 fl.hide_render = True
+skin_bsdf = MAT['skin'].node_tree.nodes.get('Principled BSDF')
+if skin_bsdf and 'Subsurface Weight' in skin_bsdf.inputs:
+    skin_bsdf.inputs['Subsurface Weight'].default_value = 0.35
+if skin_bsdf and 'Subsurface Color' in skin_bsdf.inputs:
+    skin_bsdf.inputs['Subsurface Color'].default_value = (0.72, 0.42, 0.28, 1.0)
+HERO = ('head', 'beard', 'torso', 'dhoti', 'shawl', 'upperarm', 'forearm',
+         'thigh', 'shin', 'mustache', 'topknot')
+for o in bpy.data.objects:
+    if o.type == 'MESH' and o.name.startswith('GEO-'):
+        mod = o.modifiers.new('Smooth', type='SUBSURF')
+        lv = 2 if o.name.startswith(tuple('GEO-' + h for h in HERO)) else 1
+        mod.levels = lv
+        mod.render_levels = lv
 bpy.ops.wm.save_as_mainfile(filepath=os.path.join(CH, 'blend', 'cast_sage.blend'))
 bpy.ops.export_scene.gltf(
     filepath=os.path.join(CH, 'models', 'cast', 'sage.glb'),
-    export_format='GLB', export_apply=False, export_yup=True,
+    export_format='GLB', export_apply=True, export_yup=True,
     export_cameras=False, export_lights=False,
     export_animations=True, export_frame_range=True,
     export_image_format='JPEG', export_jpeg_quality=80,
