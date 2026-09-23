@@ -56,3 +56,6 @@ characters speak the scene's dialogue (TTS), with pause / 0.5× / 1× / 2× paci
 - S10 reference study (Shining/Lusion/Oat the Goat) at user's push + cozy
   story-circle pilot on adi-01: tight ring, tree wall, close camera, Sauti
   1.25x; browser-verified clean (hard-reload needed: preview caches GLBs).
+- S11 faces (billboard eyes/brows/talking mouth + blink), fill light, slim
+  flame, cache-busting ?cb, ?freeze=1 staging hook, midpoint focus; fixed the
+  vanishing-speaker bug (nod overwrote lookAt Euler .x -> PI-flip burial).

@@ -31,7 +31,7 @@ interface SceneStyle {
 
 // (Unchanged environment art direction — spawns double as journey waypoints.)
 const STYLE: Record<string, SceneStyle> = {
-  'adi-01-naimisha': { bg: 0x070d0a, fog: [14, 85], sky: [0x02040a, 0x0d1a24], exposure: 1.2, spawn: { pos: [5.5, 2.3, -7.5], target: [0, 1.4, 0] },
+  'adi-01-naimisha': { bg: 0x070d0a, fog: [14, 85], sky: [0x02040a, 0x0d1a24], exposure: 1.2, spawn: { pos: [7.5, 2.3, -6.0], target: [0, 1.4, 0] },
     hemi: { sky: 0x2a3a4a, ground: 0x0a0f0a, i: 0.7 }, sun: { color: 0x8fa8c8, i: 0.5, pos: [-30, 40, 30] },
     fires: [{ color: 0xff8c3a, i: 90, pos: [0, 2.5, 0] }], extras: 'embers' },
   'adi-02-snake-sacrifice': { bg: 0x120606, fog: [20, 110], sky: [0x0a0505, 0x2a0d0a], exposure: 1.2, spawn: { pos: [10, 4, -13], target: [0, 3, 2] },
@@ -72,7 +72,7 @@ const STYLE: Record<string, SceneStyle> = {
 interface CastMember { arch: string; char: string; x: number; z: number; s: number }
 // Cast placed near each scene's story heart; they turn to face the arriving camera.
 const CAST: Record<string, CastMember[]> = {
-  'adi-01-naimisha': [{ arch: 'sage', char: 'Sauti', x: -2.8, z: 5.2, s: 1.25 }, { arch: 'sage', char: 'Shaunaka', x: 3.0, z: 5.6, s: 1.1 }],
+  'adi-01-naimisha': [{ arch: 'sage', char: 'Sauti', x: 3.0, z: 2.0, s: 1.25 }, { arch: 'sage', char: 'Rishi', x: 3.93, z: 3.17, s: 1.0 }, { arch: 'sage', char: 'Shaunaka', x: -3.0, z: -2.0, s: 1.1 }],
   'adi-02-snake-sacrifice': [{ arch: 'king', char: 'Janamejaya', x: -2.5, z: 5.5, s: 1.05 }, { arch: 'sage', char: 'Astika', x: 2.5, z: 6, s: 1 }],
   'adi-03-ganga': [{ arch: 'king', char: 'Shantanu', x: 3, z: 10, s: 1 }, { arch: 'princess', char: 'Ganga', x: 8.5, z: 11, s: 1 }],
   'adi-04-bhishma-vow': [{ arch: 'warrior', char: 'Bhishma', x: -2, z: 10, s: 1.15 }, { arch: 'king', char: 'Shantanu', x: 2.5, z: 10.5, s: 1 }],
@@ -104,15 +104,19 @@ const poster = document.getElementById('poster') as HTMLImageElement;
 const loadMsg = document.getElementById('loadmsg')!;
 
 // UI rests invisible; any activity wakes it briefly. The journey never waits.
+// ?freeze=1 pins spawn framing for staging shots (no wake/pan/flight/TTS).
+const FREEZE = new URLSearchParams(location.search).has('freeze');
 let awakeTimer: number | null = null;
 function wakeUI() {
   elInfo.classList.add('awake');
   if (awakeTimer) window.clearTimeout(awakeTimer);
   awakeTimer = window.setTimeout(() => elInfo.classList.remove('awake'), 3500);
 }
-window.addEventListener('pointermove', wakeUI, { passive: true });
-window.addEventListener('pointerdown', wakeUI);
-window.addEventListener('keydown', wakeUI);
+if (!FREEZE) {
+  window.addEventListener('pointermove', wakeUI, { passive: true });
+  window.addEventListener('pointerdown', wakeUI);
+  window.addEventListener('keydown', wakeUI);
+}
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -179,6 +183,11 @@ function buildLights(group: THREE.Group, st: SceneStyle): THREE.PointLight[] {
   sun.shadow.camera.top = 45; sun.shadow.camera.bottom = -45;
   sun.shadow.camera.far = 200;
   group.add(sun);
+  // Fill from the arrival side so faces never go pitch black when backlit.
+  const fill = new THREE.DirectionalLight(0xffe0b8, 0.55);
+  fill.position.set(st.spawn.pos[0], st.spawn.pos[1] + 4, st.spawn.pos[2]);
+  fill.target.position.set(0, 1, 0);
+  group.add(fill, fill.target);
   const flickers: THREE.PointLight[] = [];
   for (const f of st.fires) {
     const p = new THREE.PointLight(f.color, f.i, 34, 1.8);
@@ -312,7 +321,70 @@ function speakLine(text: string, voice?: { pitch: number; rate: number }, enable
   } catch { /* TTS unavailable */ }
 }
 
+// Cartoon faces: a billboard sprite per character — big eyes, brows, mouth —
+// with random blinks and a talking mouth while their line plays.
+const _X_AXIS = new THREE.Vector3(1, 0, 0);
+const _nodQ = new THREE.Quaternion();
+function makeFace(stern: boolean): {
+  sprite: THREE.Sprite;
+  update: (t: number, dt: number, talking: boolean) => void;
+} {
+  const cv = document.createElement('canvas');
+  cv.width = 128; cv.height = 128;
+  const g = cv.getContext('2d')!;
+  const tex = new THREE.CanvasTexture(cv);
+  tex.colorSpace = THREE.SRGBColorSpace;
+  const sprite = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, transparent: true }));
+  let nextBlink = 1.5 + Math.random() * 2.5;
+  let blinkLeft = -1;
+  let mouthPhase = 0;
+  let mouthOpen = false;
+  function draw(talking: boolean) {
+    g.clearRect(0, 0, 128, 128);
+    const closed = blinkLeft >= 0;
+    for (const ex of [42, 86]) {
+      if (closed) {
+        g.strokeStyle = '#1a1210'; g.lineWidth = 5; g.lineCap = 'round';
+        g.beginPath(); g.moveTo(ex - 13, 54); g.lineTo(ex + 13, 54); g.stroke();
+      } else {
+        g.fillStyle = '#fff';
+        g.beginPath(); g.ellipse(ex, 50, 14, 17, 0, 0, Math.PI * 2); g.fill();
+        g.fillStyle = '#1a1210';
+        g.beginPath(); g.arc(ex, 53, 6.5, 0, Math.PI * 2); g.fill();
+        g.fillStyle = '#fff';
+        g.beginPath(); g.arc(ex - 2, 50, 2.2, 0, Math.PI * 2); g.fill();
+      }
+    }
+    g.strokeStyle = '#1a1210'; g.lineWidth = 6; g.lineCap = 'round';
+    g.beginPath(); g.moveTo(28, 28); g.lineTo(56, stern ? 21 : 28); g.stroke();
+    g.beginPath(); g.moveTo(72, stern ? 21 : 28); g.lineTo(100, 28); g.stroke();
+    if (talking) {
+      const open = 5 + 6 * (0.5 + 0.5 * Math.sin(mouthPhase));
+      g.fillStyle = '#401410';
+      g.beginPath(); g.ellipse(64, 98, 10, open, 0, 0, Math.PI * 2); g.fill();
+    } else {
+      g.strokeStyle = '#1a1210'; g.lineWidth = 5;
+      g.beginPath(); g.arc(64, 88, 10, 0.15 * Math.PI, 0.85 * Math.PI); g.stroke();
+    }
+    tex.needsUpdate = true;
+  }
+  draw(false);
+  return {
+    sprite,
+    update(t, dt, talking) {
+      if (blinkLeft >= 0) {
+        blinkLeft -= dt;
+        if (blinkLeft < 0) { nextBlink = t + 2 + Math.random() * 2.5; draw(talking); }
+      } else if (t > nextBlink) { blinkLeft = 0.12; draw(talking); }
+      if (talking) { mouthPhase += dt * 14; mouthOpen = true; draw(true); }
+      else if (mouthOpen) { mouthOpen = false; mouthPhase = 0; draw(false); }
+    },
+  };
+}
+
 async function main() {
+  // Bump when art changes so browsers stop serving stale GLBs/posters.
+  const CB = 'cb4';
   const pkg: ChapterPackage = await loadChapterPackage('./package');
   const scenes = pkg.scenes;
   const dlg = await (await fetch('./package/dialogue.json')).json() as {
@@ -333,8 +405,8 @@ async function main() {
     if (!charCache.has(arch)) {
       try {
         const url = arch === 'princess'
-          ? './package/assets/models/characters/princess.glb'
-          : `./package/assets/models/cast/${arch}.glb`;
+          ? `./package/assets/models/characters/princess.glb?${CB}`
+          : `./package/assets/models/cast/${arch}.glb?${CB}`;
         const loaded = await gltf.loadAsync(url);
         const g = loaded.scene as THREE.Group;
         if (arch === 'princess') toonify(g);
@@ -369,6 +441,8 @@ async function main() {
 
   // Speaking character groups + bubble heights, for bubble anchoring.
   const speakers = new Map<string, { g: THREE.Group; h: number }>();
+  const faces = new Map<string, { sprite: THREE.Sprite; update: (t: number, dt: number, talking: boolean) => void }>();
+  let talkingChar: string | null = null;
   let focusPoint: THREE.Vector3 | null = null;
   let nod: { g: THREE.Group; start: number } | null = null;
 
@@ -384,7 +458,7 @@ async function main() {
     void playSceneAmbience(pkg.audioFileByScene.get(sceneId), ambienceForScene(sceneId));
 
     loader.classList.add('visible');
-    poster.src = `./package/assets/renders/${sceneId}.jpg`;
+    poster.src = `./package/assets/renders/${sceneId}.jpg?${CB}`;
     loadMsg.textContent = `Entering ${s.title}…`;
 
     const group = new THREE.Group();
@@ -392,7 +466,7 @@ async function main() {
     const flickers = buildLights(group, st);
     let update: (t: number, dt: number) => void = () => {};
     try {
-      const loaded = await gltf.loadAsync(`./package/assets/models/${sceneId}.glb`);
+      const loaded = await gltf.loadAsync(`./package/assets/models/${sceneId}.glb?${CB}`);
       loaded.scene.traverse((o) => {
         const mesh = o as THREE.Mesh;
         if (!mesh.isMesh) return;
@@ -416,6 +490,8 @@ async function main() {
     // idle animation running.
     const camArrive = new THREE.Vector3(...st.spawn.pos);
     speakers.clear();
+    faces.clear();
+    talkingChar = null;
     const mixers: THREE.AnimationMixer[] = [];
     for (const c of CAST[sceneId] ?? []) {
       const tpl = await getChar(c.arch);
@@ -424,14 +500,23 @@ async function main() {
       ch.position.set(c.x, 0, c.z);
       ch.scale.setScalar(c.s);
       ch.lookAt(camArrive.x, 0, camArrive.z);
+      ch.userData.baseQuat = ch.quaternion.clone();
+      ch.traverse((o) => { o.frustumCulled = false; });
       const idle = tpl.clips.find((a) => /idle/i.test(a.name)) ?? tpl.clips[0];
       if (idle) {
         const mixer = new THREE.AnimationMixer(ch);
-        mixer.clipAction(idle).play();
+        mixer.clipAction(idle.clone()).play();
         mixers.push(mixer);
       }
       group.add(ch);
       speakers.set(c.char, { g: ch, h: c.arch === 'princess' ? 2.9 : 2.5 });
+      // Face: billboard features on the head, front (+Z after lookAt).
+      const face = makeFace(/warrior|king|bhishma|drona/i.test(`${c.arch} ${c.char}`));
+      const fy = (c.arch === 'princess' ? 1.9 : 1.62) * c.s;
+      face.sprite.scale.set(0.8 * c.s, 0.8 * c.s, 1);
+      face.sprite.position.set(0, fy, 0.26 * c.s);
+      ch.add(face.sprite);
+      faces.set(c.char, face);
     }
     group.add(bubble.sprite);
     bubble.hide();
@@ -448,18 +533,22 @@ async function main() {
         update(t, dt);
         extraUpdate(t, dt);
         for (const m of mixers) m.update(dt);
+        for (const [name, f] of faces) f.update(t, dt, !paused && talkingChar === name);
         // Speaker connection: attention eases toward the speaker (unless the
         // user recently took the camera), who nods their line.
-        if (focusPoint && !paused && engine.idleSeconds() > 4) {
+        if (focusPoint && !paused && !FREEZE && engine.idleSeconds() > 4) {
           engine.controls.target.lerp(focusPoint, 1 - Math.exp(-1.6 * dt));
         }
         if (nod) {
           const k = (performance.now() / 1000 - nod.start) / 0.9;
-          if (k >= 1) { nod.g.rotation.x = 0; nod = null; }
-          else nod.g.rotation.x = -0.13 * Math.sin(k * Math.PI);
+          if (k >= 1) { nod.g.quaternion.copy(nod.g.userData.baseQuat); nod = null; }
+          else {
+            _nodQ.setFromAxisAngle(_X_AXIS, -0.13 * Math.sin(k * Math.PI));
+            nod.g.quaternion.copy(nod.g.userData.baseQuat).multiply(_nodQ);
+          }
         }
         // Journey flight: drift camera + target forward along the dolly vector.
-        if (speed > 0 && !paused && !journeyDone) {
+        if (speed > 0 && !paused && !journeyDone && !FREEZE) {
           const seg = flightSeg(sceneId);
           const step = seg.dir.clone().multiplyScalar((seg.len / segLen()) * dt * speed);
           engine.camera.position.add(step);
@@ -509,16 +598,20 @@ async function main() {
       const who = speakers.get(ls[li].char);
       if (who) {
         bubble.sprite.position.copy(who.g.position);
-        bubble.sprite.position.y += who.h * who.g.scale.x;
+        bubble.sprite.position.y += (who.h + 0.9) * who.g.scale.x;
         bubble.show(ls[li].char, ls[li].line);
-        // Lean in: camera attention glides to the speaker, who nods.
-        focusPoint = who.g.position.clone().add(new THREE.Vector3(0, 1.1 * who.g.scale.x, 0));
+        talkingChar = ls[li].char;
+        // Lean in: attention glides between speaker and story heart so the
+        // pair composition holds instead of centering one head.
+        const heart = new THREE.Vector3(...STYLE[scenes[index].sceneId].spawn.target);
+        focusPoint = who.g.position.clone().lerp(heart, 0.45).add(new THREE.Vector3(0, 1.0 * who.g.scale.x, 0));
         nod = { g: who.g, start: performance.now() / 1000 };
       } else {
         bubble.hide();
+        talkingChar = null;
       }
       const v = dlg.voices[ls[li].char];
-      speakLine(ls[li].line, v, voiceOn && !paused);
+      speakLine(ls[li].line, v, voiceOn && !paused && !FREEZE);
     }
     const done = scenes.slice(0, index).length * segLen() + Math.min(segElapsed, segLen());
     elBar.style.width = `${(done / totalLen()) * 100}%`;

@@ -74,8 +74,13 @@ while placed < 42 and tries < 400:
     tree_at(trunk_me, canopy_me, MAT['trunk'], MAT['leaf'], x, y, 1.0 + rnd.random() * 1.0)
     placed += 1
 
-# hero fire + TIGHT sage circle
+# hero fire + TIGHT sage circle (flame slimmed: fat cones swallow the cast on camera)
 fire_pit('GEO-hero-fire', 0, 0, 1.1, MAT['stone'], MAT['wood'], MAT['flame'], MAT['core'], light_energy=420.0)
+for o in bpy.data.objects:
+    if o.name.startswith('GEO-hero-fire-flame'):
+        o.scale.x *= 0.55
+        o.scale.y *= 0.55
+        o.scale.z *= 0.55
 for i in range(8):
     a = (i / 8) * 2 * math.pi + 0.2
     sx, sy = math.cos(a) * 3.2, math.sin(a) * 3.2
