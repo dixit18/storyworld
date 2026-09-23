@@ -31,11 +31,11 @@ interface SceneStyle {
 
 // (Unchanged environment art direction — spawns double as journey waypoints.)
 const STYLE: Record<string, SceneStyle> = {
-  'adi-01-naimisha': { bg: 0x070d0a, fog: [25, 130], sky: [0x02040a, 0x0d1a24], exposure: 1.05, spawn: { pos: [8, 3.0, -11], target: [0, 1.6, 2] },
-    hemi: { sky: 0x2a3a4a, ground: 0x0a0f0a, i: 0.5 }, sun: { color: 0x8fa8c8, i: 0.5, pos: [-30, 40, 30] },
+  'adi-01-naimisha': { bg: 0x070d0a, fog: [25, 130], sky: [0x02040a, 0x0d1a24], exposure: 1.2, spawn: { pos: [8, 3.0, -11], target: [0, 1.6, 2] },
+    hemi: { sky: 0x2a3a4a, ground: 0x0a0f0a, i: 0.7 }, sun: { color: 0x8fa8c8, i: 0.5, pos: [-30, 40, 30] },
     fires: [{ color: 0xff8c3a, i: 90, pos: [0, 2.5, 0] }], extras: 'embers' },
-  'adi-02-snake-sacrifice': { bg: 0x120606, fog: [20, 110], sky: [0x0a0505, 0x2a0d0a], exposure: 1.05, spawn: { pos: [10, 4, -13], target: [0, 3, 2] },
-    hemi: { sky: 0x3a1a12, ground: 0x0a0605, i: 0.4 }, sun: { color: 0xff6a3a, i: 0.6, pos: [-20, 30, 10] },
+  'adi-02-snake-sacrifice': { bg: 0x120606, fog: [20, 110], sky: [0x0a0505, 0x2a0d0a], exposure: 1.2, spawn: { pos: [10, 4, -13], target: [0, 3, 2] },
+    hemi: { sky: 0x3a1a12, ground: 0x0a0605, i: 0.65 }, sun: { color: 0xff6a3a, i: 0.6, pos: [-20, 30, 10] },
     fires: [{ color: 0xff6a3a, i: 160, pos: [0, 3, 0] }], extras: 'embers' },
   'adi-03-ganga': { bg: 0x3a4a5e, fog: [35, 180], sky: [0x4a6a9a, 0xe8a06a], exposure: 1.5, spawn: { pos: [2, 7.5, -40], target: [6, 0.5, 14] },
     hemi: { sky: 0x9db8d8, ground: 0x2a3a2a, i: 0.7 }, sun: { color: 0xffe0b0, i: 1.6, pos: [40, 30, -30] },
@@ -52,11 +52,11 @@ const STYLE: Record<string, SceneStyle> = {
   'adi-07-drona': { bg: 0xb8a888, fog: [45, 200], sky: [0x5a7a9e, 0xd8bd93], exposure: 1.5, spawn: { pos: [0, 4, -24], target: [0, 2.5, 16] },
     hemi: { sky: 0xcfd8e0, ground: 0x6a5638, i: 0.7 }, sun: { color: 0xffe8c0, i: 2.0, pos: [30, 44, 18] },
     fires: [], extras: null },
-  'adi-08-lakshagriha': { bg: 0x0d0505, fog: [22, 120], sky: [0x0d0505, 0x3a140c], exposure: 1.05, spawn: { pos: [26, 10, -34], target: [0, 5, 8] },
-    hemi: { sky: 0x3a1a10, ground: 0x0a0605, i: 0.4 }, sun: { color: 0xff8c3a, i: 0.6, pos: [-24, 26, 12] },
+  'adi-08-lakshagriha': { bg: 0x0d0505, fog: [22, 120], sky: [0x0d0505, 0x3a140c], exposure: 1.2, spawn: { pos: [26, 10, -34], target: [0, 5, 8] },
+    hemi: { sky: 0x3a1a10, ground: 0x0a0605, i: 0.65 }, sun: { color: 0xff8c3a, i: 0.6, pos: [-24, 26, 12] },
     fires: [{ color: 0xff8c3a, i: 110, pos: [-9, 2.5, -8] }, { color: 0xff8c3a, i: 90, pos: [9, 2.5, -8] }], extras: 'embers' },
-  'adi-09-hidimba': { bg: 0x040806, fog: [10, 60], sky: [0x020604, 0x0d1f18], exposure: 1.05, spawn: { pos: [0, 2.8, -14], target: [0, 3, 12] },
-    hemi: { sky: 0x1a2a24, ground: 0x050805, i: 0.4 }, sun: { color: 0x4a6a5a, i: 0.4, pos: [10, 24, -8] },
+  'adi-09-hidimba': { bg: 0x040806, fog: [10, 60], sky: [0x020604, 0x0d1f18], exposure: 1.25, spawn: { pos: [0, 2.8, -14], target: [0, 3, 12] },
+    hemi: { sky: 0x1a2a24, ground: 0x050805, i: 0.7 }, sun: { color: 0x4a6a5a, i: 0.4, pos: [10, 24, -8] },
     fires: [{ color: 0x3a7a4a, i: 30, pos: [0, 3, -10] }], extras: 'fireflies' },
   'adi-10-swayamvara': { bg: 0x8a7358, fog: [30, 150], sky: [0x6a7a9e, 0xd8b078], exposure: 1.4, spawn: { pos: [-16, 5, -20], target: [2, 2.5, 6] },
     hemi: { sky: 0xd8c8a8, ground: 0x5a4a38, i: 0.65 }, sun: { color: 0xfff2d8, i: 1.8, pos: [30, 44, 20] },
@@ -130,6 +130,11 @@ function toonify(root: THREE.Object3D) {
   root.traverse((o) => {
     const mesh = o as THREE.Mesh;
     if (!mesh.isMesh) return;
+    if (/flame/i.test(mesh.name)) {
+      // Toon fire: flat warm orange, never blown-out white.
+      mesh.material = new THREE.MeshBasicMaterial({ color: 0xff8c1a });
+      return;
+    }
     const old = mesh.material as THREE.MeshStandardMaterial | THREE.MeshStandardMaterial[];
     const first = Array.isArray(old) ? old[0] : old;
     const c = (first as THREE.MeshStandardMaterial)?.color ?? new THREE.Color(0xffffff);
@@ -186,6 +191,19 @@ function buildLights(group: THREE.Group, st: SceneStyle): THREE.PointLight[] {
 
 function addExtras(group: THREE.Group, st: SceneStyle, sceneId: string): (t: number, dt: number) => void {
   if (!st.extras || reducedMotion) return () => {};
+  // Soft round sprite so sparks/fireflies read as glow, not hexagons.
+  const dotTex = (() => {
+    const cv = document.createElement('canvas');
+    cv.width = 64; cv.height = 64;
+    const g = cv.getContext('2d')!;
+    const grad = g.createRadialGradient(32, 32, 2, 32, 32, 30);
+    grad.addColorStop(0, 'rgba(255,255,255,1)');
+    grad.addColorStop(0.45, 'rgba(255,255,255,0.7)');
+    grad.addColorStop(1, 'rgba(255,255,255,0)');
+    g.fillStyle = grad;
+    g.fillRect(0, 0, 64, 64);
+    return new THREE.CanvasTexture(cv);
+  })();
   let seed = 0;
   for (const c of sceneId) seed = (seed * 31 + c.charCodeAt(0)) >>> 0;
   const rand = (() => { let a = seed; return () => { a |= 0; a = (a + 0x6d2b79f5) | 0;
@@ -208,7 +226,8 @@ function addExtras(group: THREE.Group, st: SceneStyle, sceneId: string): (t: num
   const geo = new THREE.BufferGeometry();
   geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
   const pts = new THREE.Points(geo, new THREE.PointsMaterial({
-    color, size: isFire ? 0.16 : 0.14, transparent: true, opacity: 0.9,
+    color, size: isFire ? 0.16 : 0.14, map: dotTex, transparent: true,
+    opacity: 0.9, depthWrite: false,
   }));
   group.add(pts);
   return (t, dt) => {
@@ -235,9 +254,10 @@ const bubble = (() => {
   const g = cv.getContext('2d')!;
   const tex = new THREE.CanvasTexture(cv);
   tex.colorSpace = THREE.SRGBColorSpace;
-  const mat = new THREE.SpriteMaterial({ map: tex, transparent: true, depthTest: true });
+  const mat = new THREE.SpriteMaterial({ map: tex, transparent: true, depthTest: false });
   const sprite = new THREE.Sprite(mat);
-  sprite.scale.set(5.2, 2.6, 1);
+  sprite.scale.set(6, 3, 1);
+  sprite.renderOrder = 999;
   sprite.visible = false;
   function wrap(text: string, max: number): string[] {
     const words = text.split(' ');
@@ -349,6 +369,8 @@ async function main() {
 
   // Speaking character groups + bubble heights, for bubble anchoring.
   const speakers = new Map<string, { g: THREE.Group; h: number }>();
+  let focusPoint: THREE.Vector3 | null = null;
+  let nod: { g: THREE.Group; start: number } | null = null;
 
   async function enterScene(i: number) {
     index = i;
@@ -371,6 +393,18 @@ async function main() {
     let update: (t: number, dt: number) => void = () => {};
     try {
       const loaded = await gltf.loadAsync(`./package/assets/models/${sceneId}.glb`);
+      loaded.scene.traverse((o) => {
+        const mesh = o as THREE.Mesh;
+        if (!mesh.isMesh) return;
+        if (/flame/i.test(mesh.name)) {
+          // Toon fire: flat warm orange, never blown-out white.
+          mesh.material = new THREE.MeshBasicMaterial({ color: 0xff8c1a });
+        } else if (/firefly/i.test(mesh.name)) {
+          // Baked glow-dots: small, pale green, unlit, so they read as fireflies.
+          mesh.material = new THREE.MeshBasicMaterial({ color: 0x9adf6a });
+          mesh.scale.multiplyScalar(0.55);
+        }
+      });
       group.add(loaded.scene);
     } catch (e) {
       console.warn('GLB failed, primitive fallback:', sceneId, e);
@@ -414,6 +448,16 @@ async function main() {
         update(t, dt);
         extraUpdate(t, dt);
         for (const m of mixers) m.update(dt);
+        // Speaker connection: attention eases toward the speaker (unless the
+        // user recently took the camera), who nods their line.
+        if (focusPoint && !paused && engine.idleSeconds() > 4) {
+          engine.controls.target.lerp(focusPoint, 1 - Math.exp(-1.6 * dt));
+        }
+        if (nod) {
+          const k = (performance.now() / 1000 - nod.start) / 0.9;
+          if (k >= 1) { nod.g.rotation.x = 0; nod = null; }
+          else nod.g.rotation.x = -0.13 * Math.sin(k * Math.PI);
+        }
         // Journey flight: drift camera + target forward along the dolly vector.
         if (speed > 0 && !paused && !journeyDone) {
           const seg = flightSeg(sceneId);
@@ -431,6 +475,8 @@ async function main() {
     }, st.bg, st.fog[0], st.fog[1]);
     segElapsed = 0;
     lineIdx = -1;
+    focusPoint = null;
+    nod = null;
     setTimeout(() => loader.classList.remove('visible'), 450);
   }
 
@@ -465,6 +511,9 @@ async function main() {
         bubble.sprite.position.copy(who.g.position);
         bubble.sprite.position.y += who.h * who.g.scale.x;
         bubble.show(ls[li].char, ls[li].line);
+        // Lean in: camera attention glides to the speaker, who nods.
+        focusPoint = who.g.position.clone().add(new THREE.Vector3(0, 1.1 * who.g.scale.x, 0));
+        nod = { g: who.g, start: performance.now() / 1000 };
       } else {
         bubble.hide();
       }

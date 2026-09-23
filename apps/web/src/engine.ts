@@ -69,7 +69,10 @@ export class Engine {
     this.renderer.setSize(w, h);
   }
 
-  /** WASD / arrows glide the camera and its orbit target across the ground plane. */
+  /** Seconds since the user last dragged / zoomed / roamed. */
+  idleSeconds(): number {
+    return (performance.now() - this.lastInteract) / 1000;
+  }
   private roam(dt: number) {
     const fwd = new THREE.Vector3();
     this.camera.getWorldDirection(fwd);

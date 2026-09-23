@@ -47,3 +47,9 @@ characters speak the scene's dialogue (TTS), with pause / 0.5× / 1× / 2× paci
 - S8 sky domes (canvas gradient, per-scene moods) after proving OutlineEffect
   silently eats background materials; per-scene exposure; dolly 0.18/+2.0;
   speed keys 1/2/3; agent-browser discipline (wait --text/--fn, single batch).
+- S9 feel pass from user QA (still triangular envs, occluded bubbles, static
+  cast): blob_canopy.py on all outdoor blends (156 canopies in adi-01; GLBs
+  still 29MB); bubbles always-on-top + speaker focus + nod; toon flames flat
+  orange; soft-glow particle sprites; night hemi/exposure lift; official
+  Blender MCP page + ahujasid repo mined (Poly Haven/Poly Pizza/Rodin patterns
+  noted, Rodin deferred); rebuilt + browser-verified scene 01.
