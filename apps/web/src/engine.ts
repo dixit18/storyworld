@@ -1,7 +1,6 @@
 // 3D engine: WebGL renderer, roamable camera (orbit + WASD), fog, lighting rig.
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import { OutlineEffect } from 'three/examples/jsm/effects/OutlineEffect.js';
 
 export interface EnvResult {
   group: THREE.Group;
@@ -13,7 +12,6 @@ export interface EnvResult {
 
 export class Engine {
   renderer: THREE.WebGLRenderer;
-  effect: OutlineEffect;
   scene: THREE.Scene;
   camera: THREE.PerspectiveCamera;
   controls: OrbitControls;
@@ -32,7 +30,6 @@ export class Engine {
     this.renderer.shadowMap.type = THREE.PCFShadowMap;
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
     this.renderer.toneMappingExposure = 1.05;
-    this.effect = new OutlineEffect(this.renderer, { defaultThickness: 0.0025 });
 
     this.scene = new THREE.Scene();
     this.camera = new THREE.PerspectiveCamera(58, 1, 0.1, 600);
@@ -59,7 +56,7 @@ export class Engine {
       this.updater(now / 1000, dt);
       this.controls.autoRotate = this.idleAutoRotate && now - this.lastInteract > 9000;
       this.controls.update();
-      this.effect.render(this.scene, this.camera);
+      this.renderer.render(this.scene, this.camera);
     };
     requestAnimationFrame(loop);
   }

@@ -20,6 +20,8 @@ import {
 interface SceneStyle {
   bg: number;
   fog: [number, number];
+  sky: [number, number]; // top, horizon
+  exposure: number;
   spawn: { pos: [number, number, number]; target: [number, number, number] };
   hemi: { sky: number; ground: number; i: number };
   sun: { color: number; i: number; pos: [number, number, number] };
@@ -29,40 +31,40 @@ interface SceneStyle {
 
 // (Unchanged environment art direction — spawns double as journey waypoints.)
 const STYLE: Record<string, SceneStyle> = {
-  'adi-01-naimisha': { bg: 0x070d0a, fog: [25, 130], spawn: { pos: [8, 3.0, -11], target: [0, 1.6, 2] },
+  'adi-01-naimisha': { bg: 0x070d0a, fog: [25, 130], sky: [0x02040a, 0x0d1a24], exposure: 1.05, spawn: { pos: [8, 3.0, -11], target: [0, 1.6, 2] },
     hemi: { sky: 0x2a3a4a, ground: 0x0a0f0a, i: 0.5 }, sun: { color: 0x8fa8c8, i: 0.5, pos: [-30, 40, 30] },
     fires: [{ color: 0xff8c3a, i: 90, pos: [0, 2.5, 0] }], extras: 'embers' },
-  'adi-02-snake-sacrifice': { bg: 0x120606, fog: [20, 110], spawn: { pos: [10, 4, -13], target: [0, 3, 2] },
+  'adi-02-snake-sacrifice': { bg: 0x120606, fog: [20, 110], sky: [0x0a0505, 0x2a0d0a], exposure: 1.05, spawn: { pos: [10, 4, -13], target: [0, 3, 2] },
     hemi: { sky: 0x3a1a12, ground: 0x0a0605, i: 0.4 }, sun: { color: 0xff6a3a, i: 0.6, pos: [-20, 30, 10] },
     fires: [{ color: 0xff6a3a, i: 160, pos: [0, 3, 0] }], extras: 'embers' },
-  'adi-03-ganga': { bg: 0x3a4a5e, fog: [35, 180], spawn: { pos: [2, 7.5, -40], target: [6, 0.5, 14] },
+  'adi-03-ganga': { bg: 0x3a4a5e, fog: [35, 180], sky: [0x4a6a9a, 0xe8a06a], exposure: 1.5, spawn: { pos: [2, 7.5, -40], target: [6, 0.5, 14] },
     hemi: { sky: 0x9db8d8, ground: 0x2a3a2a, i: 0.7 }, sun: { color: 0xffe0b0, i: 1.6, pos: [40, 30, -30] },
     fires: [], extras: null },
-  'adi-04-bhishma-vow': { bg: 0x171006, fog: [15, 90], spawn: { pos: [11, 3.4, -12], target: [0, 3.5, 13] },
+  'adi-04-bhishma-vow': { bg: 0x171006, fog: [15, 90], sky: [0x171006, 0x3a2a18], exposure: 1.2, spawn: { pos: [11, 3.4, -12], target: [0, 3.5, 13] },
     hemi: { sky: 0x5a4a30, ground: 0x14100a, i: 0.5 }, sun: { color: 0xffd88a, i: 1.2, pos: [10, 24, 14] },
     fires: [{ color: 0xffb35a, i: 30, pos: [-8, 3.5, -2] }, { color: 0xffb35a, i: 30, pos: [8, 3.5, -2] }], extras: null },
-  'adi-05-vyasa-line': { bg: 0x0d0d14, fog: [12, 65], spawn: { pos: [8, 2.8, -11], target: [0, 1.4, 6] },
+  'adi-05-vyasa-line': { bg: 0x0d0d14, fog: [12, 65], sky: [0x0d0d14, 0x2a2438], exposure: 1.15, spawn: { pos: [8, 2.8, -11], target: [0, 1.4, 6] },
     hemi: { sky: 0x3a3450, ground: 0x0a0a10, i: 0.45 }, sun: { color: 0x8a7aa8, i: 0.5, pos: [0, 20, -10] },
     fires: [{ color: 0xff9a3a, i: 25, pos: [5, 2.2, -4] }], extras: null },
-  'adi-06-births': { bg: 0x87a6c4, fog: [45, 200], spawn: { pos: [2, 3.5, 6], target: [-10, 1, -18] },
+  'adi-06-births': { bg: 0x87a6c4, fog: [45, 200], sky: [0x3a6ab8, 0xbcd4e8], exposure: 1.5, spawn: { pos: [2, 3.5, 6], target: [-10, 1, -18] },
     hemi: { sky: 0xbdd4e8, ground: 0x3a5a3a, i: 0.8 }, sun: { color: 0xfff2d8, i: 2.0, pos: [40, 50, 20] },
     fires: [], extras: null },
-  'adi-07-drona': { bg: 0xb8a888, fog: [45, 200], spawn: { pos: [0, 4, -24], target: [0, 2.5, 16] },
+  'adi-07-drona': { bg: 0xb8a888, fog: [45, 200], sky: [0x5a7a9e, 0xd8bd93], exposure: 1.5, spawn: { pos: [0, 4, -24], target: [0, 2.5, 16] },
     hemi: { sky: 0xcfd8e0, ground: 0x6a5638, i: 0.7 }, sun: { color: 0xffe8c0, i: 2.0, pos: [30, 44, 18] },
     fires: [], extras: null },
-  'adi-08-lakshagriha': { bg: 0x0d0505, fog: [22, 120], spawn: { pos: [26, 10, -34], target: [0, 5, 8] },
+  'adi-08-lakshagriha': { bg: 0x0d0505, fog: [22, 120], sky: [0x0d0505, 0x3a140c], exposure: 1.05, spawn: { pos: [26, 10, -34], target: [0, 5, 8] },
     hemi: { sky: 0x3a1a10, ground: 0x0a0605, i: 0.4 }, sun: { color: 0xff8c3a, i: 0.6, pos: [-24, 26, 12] },
     fires: [{ color: 0xff8c3a, i: 110, pos: [-9, 2.5, -8] }, { color: 0xff8c3a, i: 90, pos: [9, 2.5, -8] }], extras: 'embers' },
-  'adi-09-hidimba': { bg: 0x040806, fog: [10, 60], spawn: { pos: [0, 2.8, -14], target: [0, 3, 12] },
+  'adi-09-hidimba': { bg: 0x040806, fog: [10, 60], sky: [0x020604, 0x0d1f18], exposure: 1.05, spawn: { pos: [0, 2.8, -14], target: [0, 3, 12] },
     hemi: { sky: 0x1a2a24, ground: 0x050805, i: 0.4 }, sun: { color: 0x4a6a5a, i: 0.4, pos: [10, 24, -8] },
     fires: [{ color: 0x3a7a4a, i: 30, pos: [0, 3, -10] }], extras: 'fireflies' },
-  'adi-10-swayamvara': { bg: 0x8a7358, fog: [30, 150], spawn: { pos: [-16, 5, -20], target: [2, 2.5, 6] },
+  'adi-10-swayamvara': { bg: 0x8a7358, fog: [30, 150], sky: [0x6a7a9e, 0xd8b078], exposure: 1.4, spawn: { pos: [-16, 5, -20], target: [2, 2.5, 6] },
     hemi: { sky: 0xd8c8a8, ground: 0x5a4a38, i: 0.65 }, sun: { color: 0xfff2d8, i: 1.8, pos: [30, 44, 20] },
     fires: [], extras: null },
-  'adi-11-division': { bg: 0x4a3a52, fog: [28, 140], spawn: { pos: [0, 6, -28], target: [0, 2.5, 6] },
+  'adi-11-division': { bg: 0x4a3a52, fog: [28, 140], sky: [0x2a2440, 0xc0705a], exposure: 1.3, spawn: { pos: [0, 6, -28], target: [0, 2.5, 6] },
     hemi: { sky: 0x7a5a7a, ground: 0x2a2030, i: 0.55 }, sun: { color: 0xffb37a, i: 1.2, pos: [-30, 22, 20] },
     fires: [], extras: null },
-  'adi-12-indraprastha': { bg: 0xd9a05a, fog: [40, 180], spawn: { pos: [38, 14, -48], target: [4, 9, 12] },
+  'adi-12-indraprastha': { bg: 0xd9a05a, fog: [40, 180], sky: [0x5a7ab0, 0xf0a05a], exposure: 1.5, spawn: { pos: [38, 14, -48], target: [4, 9, 12] },
     hemi: { sky: 0xe8d0a8, ground: 0x4a5a42, i: 0.7 }, sun: { color: 0xffd8a0, i: 2.2, pos: [-40, 26, 30] },
     fires: [{ color: 0xff8c3a, i: 50, pos: [18, 1.5, 48] }], extras: 'embers' },
 };
@@ -137,6 +139,29 @@ function toonify(root: THREE.Object3D) {
       gradientMap,
     });
   });
+}
+
+function makeSkyDome(top: number, horizon: number): THREE.Mesh {
+  const cv = document.createElement('canvas');
+  cv.width = 4; cv.height = 256;
+  const g = cv.getContext('2d')!;
+  const cTop = `#${top.toString(16).padStart(6, '0')}`;
+  const cHor = `#${horizon.toString(16).padStart(6, '0')}`;
+  const grad = g.createLinearGradient(0, 0, 0, 256);
+  grad.addColorStop(0.0, cTop);
+  grad.addColorStop(0.46, cTop);
+  grad.addColorStop(0.52, cHor);
+  grad.addColorStop(0.58, cHor);
+  grad.addColorStop(1.0, '#050505');
+  g.fillStyle = grad;
+  g.fillRect(0, 0, 4, 256);
+  const tex = new THREE.CanvasTexture(cv);
+  tex.colorSpace = THREE.SRGBColorSpace;
+  const mat = new THREE.MeshBasicMaterial({ map: tex, side: THREE.BackSide, fog: false, depthWrite: false });
+  const dome = new THREE.Mesh(new THREE.SphereGeometry(420, 24, 16), mat);
+  dome.frustumCulled = false;
+  dome.renderOrder = -10;
+  return dome;
 }
 
 function buildLights(group: THREE.Group, st: SceneStyle): THREE.PointLight[] {
@@ -341,6 +366,7 @@ async function main() {
     loadMsg.textContent = `Entering ${s.title}…`;
 
     const group = new THREE.Group();
+    group.add(makeSkyDome(st.sky[0], st.sky[1]));
     const flickers = buildLights(group, st);
     let update: (t: number, dt: number) => void = () => {};
     try {
@@ -377,6 +403,7 @@ async function main() {
     bubble.hide();
     const extraUpdate = addExtras(group, st, sceneId);
     const seedF = st.fires.map((f) => f.i);
+    engine.renderer.toneMappingExposure = st.exposure;
     engine.setEnvironment({
       group,
       spawn: st.spawn,
@@ -414,8 +441,8 @@ async function main() {
     if (!seg) {
       const st = STYLE[sceneId];
       const a = new THREE.Vector3(...st.spawn.pos);
-      const b = a.clone().lerp(new THREE.Vector3(...st.spawn.target), 0.25);
-      b.y += 1.5;
+      const b = a.clone().lerp(new THREE.Vector3(...st.spawn.target), 0.18);
+      b.y += 2.0;
       const dir = b.clone().sub(a);
       seg = { dir: dir.clone().normalize(), len: dir.length() };
       segCache.set(sceneId, seg);
@@ -482,6 +509,9 @@ async function main() {
       e.preventDefault();
       btnPause.click();
     }
+    if (e.key === '1') setSpeed(0.5);
+    if (e.key === '2') setSpeed(1);
+    if (e.key === '3') setSpeed(2);
   });
 
   const unlock = () => {
