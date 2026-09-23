@@ -66,3 +66,6 @@ characters speak the scene's dialogue (TTS), with pause / 0.5× / 1× / 2× paci
   Idle+blink, Arjuna->warrior, VARIETY skin slot + 20 rows, OWN_KIT wiring;
   journey-verified scenes 1-2, zero console errors. NEXT: restage scenes
   2-12 (adi-02 poles overexposed + center-framed) + env dressing pass.
+- S15 nutcracker fix: sage v2 smooth-skinned joined body + bigger eyes +
+  thicker limbs + neck; pattern ported to kit (all 4 rebuilt); verified in
+  player, committed.

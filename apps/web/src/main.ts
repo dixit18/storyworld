@@ -409,7 +409,7 @@ function makeFace(stern: boolean): {
 
 async function main() {
   // Bump when art changes so browsers stop serving stale GLBs/posters.
-  const CB = 'cb7';
+  const CB = 'cb9';
   const pkg: ChapterPackage = await loadChapterPackage('./package');
   const scenes = pkg.scenes;
   const dlg = await (await fetch('./package/dialogue.json')).json() as {
@@ -545,17 +545,21 @@ async function main() {
         ch.traverse((o) => {
           const mesh = o as THREE.Mesh;
           if (!mesh.isMesh) return;
-          const m = mesh.material as THREE.MeshStandardMaterial;
-          const n = (m.name || '').toLowerCase();
-          const tint = ['dhoti', 'saree', 'skirt', 'pant'].some((k) => n.includes(k)) ? vary.base
-            : ['shawl', 'kurta', 'blouse'].some((k) => n.includes(k)) ? vary.drape
-            : (n.includes('beard') || n.includes('mustache')) ? vary.beard
-            : n.includes('skin') ? vary.skin : null;
-          if (tint) {
+          const slots = (Array.isArray(mesh.material) ? mesh.material : [mesh.material]) as THREE.MeshStandardMaterial[];
+          let changed = false;
+          const out = slots.map((m) => {
+            const n = (m.name || '').toLowerCase();
+            const tint = ['dhoti', 'saree', 'skirt', 'pant'].some((k) => n.includes(k)) ? vary.base
+              : ['shawl', 'kurta', 'blouse'].some((k) => n.includes(k)) ? vary.drape
+              : (n.includes('beard') || n.includes('mustache')) ? vary.beard
+              : n.includes('skin') ? vary.skin : null;
+            if (!tint) return m;
             const cp = m.clone();
             cp.color.setRGB(...tint);
-            mesh.material = cp;
-          }
+            changed = true;
+            return cp;
+          });
+          if (changed) mesh.material = Array.isArray(mesh.material) ? out : out[0];
         });
       }
       // Face: billboard features on the head, front (+Z after lookAt).

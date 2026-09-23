@@ -136,9 +136,9 @@ def build_face(spec):
     for sx in (1, -1):
         ball(0.045, (0.20 * sx, 0, 1.68))
         part(f'GEO-ear{sx}', skin, 'head')
-        ball(0.052, (0.085 * sx, 0.175, 1.70), sy=0.55)
+        ball(0.062, (0.085 * sx, 0.175, 1.70), sy=0.55)
         part(f'GEO-eye{sx}', white, 'head')
-        ball(0.022, (0.085 * sx, 0.205, 1.70), sy=0.5)
+        ball(0.028, (0.085 * sx, 0.205, 1.70), sy=0.5)
         part(f'GEO-pupil{sx}', pupil, 'head')
         bpy.ops.mesh.primitive_uv_sphere_add(radius=0.056, segments=12, ring_count=6,
                                              location=(0.085 * sx, 0.175, 1.715))
@@ -215,15 +215,15 @@ def build_face(spec):
 def limbs(skin, arm_r=1.0, leg_r=1.0):
     for sx in (1, -1):
         side = 'L' if sx == 1 else 'R'
-        cyl(0.062 * arm_r, 0.36, (0.26 * sx, 0, 1.27))
+        cyl(0.072 * arm_r, 0.36, (0.26 * sx, 0, 1.27))
         part(f'GEO-upperarm{side}', skin, f'upperarm.{side}')
-        cyl(0.052 * arm_r, 0.34, (0.285 * sx, 0.01, 0.98))
+        cyl(0.060 * arm_r, 0.34, (0.285 * sx, 0.05, 0.98))
         part(f'GEO-forearm{side}', skin, f'forearm.{side}')
-        ball(0.06 * arm_r, (0.295 * sx, 0.02, 0.83))
+        ball(0.068 * arm_r, (0.295 * sx, 0.10, 0.83))
         part(f'GEO-hand{side}', skin, f'forearm.{side}')
-        cyl(0.075 * leg_r, 0.45, (0.11 * sx, 0, 0.73))
+        cyl(0.085 * leg_r, 0.45, (0.11 * sx, 0, 0.73))
         part(f'GEO-thigh{side}', skin, f'thigh.{side}')
-        cyl(0.06 * leg_r, 0.44, (0.12 * sx, 0.015, 0.31))
+        cyl(0.068 * leg_r, 0.44, (0.12 * sx, 0.015, 0.31))
         part(f'GEO-shin{side}', skin, f'shin.{side}')
         bpy.ops.mesh.primitive_cube_add(size=1, location=(0.12 * sx, 0.06, 0.05))
         ft = part(f'GEO-foot{side}', skin, f'shin.{side}')
@@ -342,6 +342,8 @@ def build_king():
                 'hair': 'crown', 'hair_color': (0.12, 0.09, 0.07, 1.0)})
     bpy.ops.mesh.primitive_cylinder_add(radius=0.19, depth=0.48, vertices=16, location=(0, 0, 1.24))
     part('GEO-kurta', kurta, 'spine')
+    cyl(0.10, 0.26, (0, 0, 1.54))
+    part('GEO-neck', skin, 'chest')
     bpy.ops.mesh.primitive_torus_add(major_radius=0.12, minor_radius=0.022, location=(0, 0.095, 1.36))
     nl = part('GEO-necklace', gold, 'chest')
     nl.rotation_euler = (math.pi / 2, 0, 0)
@@ -374,6 +376,8 @@ def build_warrior():
                 'hair': 'band', 'band_color': (0.75, 0.2, 0.1, 1.0)})
     bpy.ops.mesh.primitive_cylinder_add(radius=0.20, depth=0.46, vertices=16, location=(0, 0, 1.26))
     part('GEO-armor', armor, 'spine')
+    cyl(0.10, 0.26, (0, 0, 1.54))
+    part('GEO-neck', skin, 'chest')
     for i, z in enumerate((1.16, 1.30)):
         bpy.ops.mesh.primitive_torus_add(major_radius=0.205, minor_radius=0.018, location=(0, 0, z))
         part(f'GEO-plate{i}', M('MAT-warrior-dark', (0.35, 0.24, 0.13, 1.0), 0.6), 'spine')
@@ -405,6 +409,8 @@ def build_strongman():
                 'hair': 'cap', 'hair_color': (0.10, 0.08, 0.06, 1.0)})
     bpy.ops.mesh.primitive_cylinder_add(radius=0.22, depth=0.48, vertices=16, location=(0, 0, 1.24))
     part('GEO-torso', skin, 'spine')
+    cyl(0.11, 0.28, (0, 0, 1.54))
+    part('GEO-neck', skin, 'chest')
     bpy.ops.mesh.primitive_cylinder_add(radius=0.26, depth=0.30, vertices=14, location=(0, 0, 0.90))
     part('GEO-langot', band, 'hips')
     limbs(skin, arm_r=1.15, leg_r=1.18)
@@ -429,6 +435,8 @@ def build_princess():
                 'hair': 'long', 'hair_color': (0.08, 0.06, 0.05, 1.0), 'bindi': True})
     bpy.ops.mesh.primitive_cylinder_add(radius=0.185, depth=0.46, vertices=16, location=(0, 0, 1.26))
     part('GEO-blouse', blouse, 'spine')
+    cyl(0.09, 0.24, (0, 0, 1.53))
+    part('GEO-neck', skin, 'chest')
     bpy.ops.mesh.primitive_cone_add(radius1=0.34, radius2=0.24, depth=1.0, vertices=18,
                                     location=(0, 0, 0.50))
     part('GEO-skirt', saree, 'hips')

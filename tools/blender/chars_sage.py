@@ -161,9 +161,9 @@ for sx in (1, -1):
 # eyes: white + pupil proud of the face, lids for blink
 eyes = []
 for sx in (1, -1):
-    ball(0.052, (0.085 * sx, 0.175, 1.70), sy=0.55)
+    ball(0.062, (0.085 * sx, 0.175, 1.70), sy=0.55)
     part(f'GEO-eye{sx}', MAT['white'], 'head')
-    ball(0.022, (0.085 * sx, 0.205, 1.70), sy=0.5)
+    ball(0.028, (0.085 * sx, 0.205, 1.70), sy=0.5)
     part(f'GEO-pupil{sx}', MAT['pupil'], 'head')
     bpy.ops.mesh.primitive_uv_sphere_add(radius=0.056, segments=12, ring_count=6,
                                          location=(0.085 * sx, 0.175, 1.715))
@@ -209,16 +209,16 @@ part('GEO-knot-tie', MAT['border'], 'head')
 # ---------- limbs ----------
 for sx in (1, -1):
     side = 'L' if sx == 1 else 'R'
-    cyl(0.062, 0.36, (0.26 * sx, 0, 1.27))
+    cyl(0.075, 0.36, (0.26 * sx, 0, 1.27))
     part(f'GEO-upperarm{side}', MAT['skin'], f'upperarm.{side}')
     # armlet on right upper arm
     if sx == -1:
         bpy.ops.mesh.primitive_torus_add(major_radius=0.068, minor_radius=0.018,
                                          location=(0.26 * sx, 0, 1.36))
         part('GEO-armlet', MAT['border'], f'upperarm.{side}')
-    cyl(0.052, 0.34, (0.285 * sx, 0.01, 0.98))
+    cyl(0.062, 0.34, (0.285 * sx, 0.05, 0.98))
     part(f'GEO-forearm{side}', MAT['skin'], f'forearm.{side}')
-    ball(0.06, (0.295 * sx, 0.02, 0.83))
+    ball(0.07, (0.295 * sx, 0.10, 0.83))
     part(f'GEO-hand{side}', MAT['skin'], f'forearm.{side}')
     cyl(0.075, 0.45, (0.11 * sx, 0, 0.73))
     part(f'GEO-thigh{side}', MAT['skin'], f'thigh.{side}')
@@ -233,7 +233,33 @@ for sx in (1, -1):
 cyl(0.028, 1.55, (-0.325, 0.04, 0.85))
 part('GEO-staff', MAT['wood'], 'forearm.R')
 
-bone_parent_all()
+# neck bridges torso into head (part of the skinned body mass)
+cyl(0.11, 0.30, (0, 0, 1.55))
+part('GEO-neck', MAT['skin'])
+
+BODY_SET = {'GEO-torso', 'GEO-neck', 'GEO-dhoti',
+            'GEO-upperarmL', 'GEO-upperarmR', 'GEO-forearmL', 'GEO-forearmR',
+            'GEO-handL', 'GEO-handR', 'GEO-thighL', 'GEO-thighR',
+            'GEO-shinL', 'GEO-shinR', 'GEO-footL', 'GEO-footR'}
+# join the body into ONE smooth-skinned mesh (no nutcracker segments): clear
+# the direct bone parenting first, join, then deform with automatic weights
+bpy.ops.object.mode_set(mode='OBJECT')
+for n in BODY_SET:
+    # object transforms are identity here (verts baked at build), so dropping
+    # the direct bone parent changes nothing visually; join keeps placement
+    bpy.data.objects[n].parent = None
+bpy.ops.object.select_all(action='DESELECT')
+for n in BODY_SET:
+    bpy.data.objects[n].select_set(True)
+bpy.context.view_layer.objects.active = bpy.data.objects['GEO-torso']
+bpy.ops.object.join()
+body = bpy.context.active_object
+body.name = 'GEO-body'
+bpy.ops.object.select_all(action='DESELECT')
+body.select_set(True)
+amt.select_set(True)
+bpy.context.view_layer.objects.active = amt
+bpy.ops.object.parent_set(type='ARMATURE_AUTO')
 
 # ---------- idle animation (72f loop): bob, sway, head drift, blink ----------
 scene = bpy.context.scene
@@ -309,9 +335,16 @@ scene.render.filepath = os.path.join(CH, 'renders', 'cast_sage.png')
 bpy.ops.render.render(write_still=True)
 print('RENDERED cast_sage.png')
 
-# ---------- export (subsurf baked: smooth clay-toon, not faceted primitives) ----------
+# ---------- export (subsurf baked manually; armature left live for animation) --
 bpy.ops.object.select_all(action='DESELECT')
 fl.hide_render = True
+bpy.ops.object.mode_set(mode='OBJECT')
+for o in bpy.data.objects:
+    if o.type == 'MESH' and o.name.startswith('GEO-'):
+        bpy.context.view_layer.objects.active = o
+        for mod in list(o.modifiers):
+            if mod.type == 'SUBSURF':
+                bpy.ops.object.modifier_apply(modifier=mod.name)
 skin_bsdf = MAT['skin'].node_tree.nodes.get('Principled BSDF')
 if skin_bsdf and 'Subsurface Weight' in skin_bsdf.inputs:
     skin_bsdf.inputs['Subsurface Weight'].default_value = 0.35
@@ -328,7 +361,7 @@ for o in bpy.data.objects:
 bpy.ops.wm.save_as_mainfile(filepath=os.path.join(CH, 'blend', 'cast_sage.blend'))
 bpy.ops.export_scene.gltf(
     filepath=os.path.join(CH, 'models', 'cast', 'sage.glb'),
-    export_format='GLB', export_apply=True, export_yup=True,
+    export_format='GLB', export_apply=False, export_yup=True,
     export_cameras=False, export_lights=False,
     export_animations=True, export_frame_range=True,
     export_image_format='JPEG', export_jpeg_quality=80,
