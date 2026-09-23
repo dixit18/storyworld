@@ -72,12 +72,28 @@ const STYLE: Record<string, SceneStyle> = {
 interface CastMember { arch: string; char: string; x: number; z: number; s: number }
 // Per-character cloth tints so same-archetype cast never reads as clones.
 // Colors are linear-space RGB triplets for MeshStandardMaterial.color.
-const VARIETY: Record<string, { dhoti?: [number, number, number]; shawl?: [number, number, number]; beard?: [number, number, number] }> = {
-  Sauti: { dhoti: [0.93, 0.88, 0.76], shawl: [0.78, 0.34, 0.12], beard: [0.82, 0.82, 0.80] },
-  Rishi: { dhoti: [0.95, 0.62, 0.22], shawl: [0.60, 0.26, 0.10], beard: [0.45, 0.43, 0.40] },
-  Shaunaka: { dhoti: [0.88, 0.82, 0.70], shawl: [0.55, 0.15, 0.08], beard: [0.90, 0.89, 0.86] },
-  Astika: { dhoti: [0.90, 0.85, 0.72], shawl: [0.30, 0.42, 0.22], beard: [0.82, 0.82, 0.80] },
-  Vyasa: { dhoti: [0.93, 0.88, 0.76], shawl: [0.72, 0.58, 0.20], beard: [0.55, 0.53, 0.50] },
+const OWN_KIT = new Set(['sage', 'king', 'warrior', 'strongman', 'princess']);
+const VARIETY: Record<string, { base?: [number, number, number]; drape?: [number, number, number]; beard?: [number, number, number]; skin?: [number, number, number] }> = {
+  Sauti: { base: [0.93, 0.88, 0.76], drape: [0.78, 0.34, 0.12], beard: [0.82, 0.82, 0.80] },
+  Rishi: { base: [0.95, 0.62, 0.22], drape: [0.60, 0.26, 0.10], beard: [0.45, 0.43, 0.40] },
+  Shaunaka: { base: [0.88, 0.82, 0.70], drape: [0.55, 0.15, 0.08], beard: [0.90, 0.89, 0.86] },
+  Astika: { base: [0.90, 0.85, 0.72], drape: [0.30, 0.42, 0.22], beard: [0.82, 0.82, 0.80] },
+  Vyasa: { base: [0.93, 0.88, 0.76], drape: [0.72, 0.58, 0.20], beard: [0.55, 0.53, 0.50] },
+  Durvasa: { base: [0.85, 0.78, 0.62], drape: [0.35, 0.20, 0.10], beard: [0.30, 0.28, 0.26] },
+  Drona: { base: [0.92, 0.87, 0.75], drape: [0.80, 0.76, 0.66], beard: [0.70, 0.68, 0.65] },
+  Vidura: { base: [0.90, 0.85, 0.72], drape: [0.75, 0.70, 0.58], beard: [0.82, 0.82, 0.80] },
+  Janamejaya: { base: [0.90, 0.82, 0.66], drape: [0.45, 0.08, 0.10] },
+  Shantanu: { base: [0.88, 0.80, 0.64], drape: [0.40, 0.10, 0.14] },
+  Dhritarashtra: { base: [0.80, 0.74, 0.60], drape: [0.30, 0.08, 0.10] },
+  Bhishma: { base: [0.85, 0.85, 0.88], beard: [0.88, 0.88, 0.86] },
+  Yudhishthira: { base: [0.88, 0.78, 0.55] },
+  Arjuna: { base: [0.18, 0.35, 0.22] },
+  Krishna: { base: [0.95, 0.75, 0.20], skin: [0.30, 0.38, 0.55] },
+  Ganga: { base: [0.85, 0.88, 0.92] },
+  Satyavati: { base: [0.20, 0.35, 0.25] },
+  Kunti: { base: [0.70, 0.15, 0.12] },
+  Hidimbi: { base: [0.30, 0.40, 0.20] },
+  Draupadi: { base: [0.68, 0.12, 0.10] },
 };
 // Cast placed near each scene's story heart; they turn to face the arriving camera.
 const CAST: Record<string, CastMember[]> = {
@@ -87,12 +103,12 @@ const CAST: Record<string, CastMember[]> = {
   'adi-04-bhishma-vow': [{ arch: 'warrior', char: 'Bhishma', x: -2, z: 10, s: 1.15 }, { arch: 'king', char: 'Shantanu', x: 2.5, z: 10.5, s: 1 }],
   'adi-05-vyasa-line': [{ arch: 'sage', char: 'Vyasa', x: -1.5, z: 0, s: 1.1 }, { arch: 'princess', char: 'Satyavati', x: 2, z: 0.5, s: 1 }],
   'adi-06-births': [{ arch: 'princess', char: 'Kunti', x: -6, z: -10, s: 1 }, { arch: 'sage', char: 'Durvasa', x: -2.5, z: -9, s: 1 }],
-  'adi-07-drona': [{ arch: 'sage', char: 'Drona', x: 3, z: 6, s: 1.05 }, { arch: 'ranger', char: 'Arjuna', x: -1, z: 7, s: 1 }],
+  'adi-07-drona': [{ arch: 'sage', char: 'Drona', x: 3, z: 6, s: 1.05 }, { arch: 'warrior', char: 'Arjuna', x: -1, z: 7, s: 1 }],
   'adi-08-lakshagriha': [{ arch: 'warrior', char: 'Yudhishthira', x: -2, z: 2, s: 0.95 }, { arch: 'sage', char: 'Vidura', x: 2, z: 2.5, s: 1 }],
   'adi-09-hidimba': [{ arch: 'strongman', char: 'Bhima', x: -2, z: 4, s: 1.25 }, { arch: 'princess', char: 'Hidimbi', x: 2, z: 4.5, s: 1 }],
-  'adi-10-swayamvara': [{ arch: 'princess', char: 'Draupadi', x: 0, z: 0, s: 1.05 }, { arch: 'ranger', char: 'Arjuna', x: 3.5, z: 0.5, s: 1 }],
+  'adi-10-swayamvara': [{ arch: 'princess', char: 'Draupadi', x: 0, z: 0, s: 1.05 }, { arch: 'warrior', char: 'Arjuna', x: 3.5, z: 0.5, s: 1 }],
   'adi-11-division': [{ arch: 'king', char: 'Dhritarashtra', x: -3, z: 0, s: 1.1 }, { arch: 'warrior', char: 'Yudhishthira', x: 3, z: 0.5, s: 1 }],
-  'adi-12-indraprastha': [{ arch: 'warrior', char: 'Krishna', x: 0, z: 4, s: 1 }, { arch: 'ranger', char: 'Arjuna', x: 3, z: 4.5, s: 0.95 }],
+  'adi-12-indraprastha': [{ arch: 'warrior', char: 'Krishna', x: 0, z: 4, s: 1 }, { arch: 'warrior', char: 'Arjuna', x: 3, z: 4.5, s: 0.95 }],
 };
 
 interface Line { char: string; arch: string; line: string }
@@ -393,7 +409,7 @@ function makeFace(stern: boolean): {
 
 async function main() {
   // Bump when art changes so browsers stop serving stale GLBs/posters.
-  const CB = 'cb6';
+  const CB = 'cb7';
   const pkg: ChapterPackage = await loadChapterPackage('./package');
   const scenes = pkg.scenes;
   const dlg = await (await fetch('./package/dialogue.json')).json() as {
@@ -511,7 +527,7 @@ async function main() {
       ch.lookAt(camArrive.x, 0, camArrive.z);
       // Own-kit models are authored facing Blender +Y (= three -Z after Yup
       // export); Quaternius face +Z. Flip ours so all face the arrival.
-      if (c.arch === 'sage') ch.rotateY(Math.PI);
+      if (OWN_KIT.has(c.arch)) ch.rotateY(Math.PI);
       ch.userData.baseQuat = ch.quaternion.clone();
       ch.traverse((o) => { o.frustumCulled = false; });
       const idle = tpl.clips.find((a) => /idle/i.test(a.name)) ?? tpl.clips[0];
@@ -531,8 +547,10 @@ async function main() {
           if (!mesh.isMesh) return;
           const m = mesh.material as THREE.MeshStandardMaterial;
           const n = (m.name || '').toLowerCase();
-          const tint = n.includes('dhoti') ? vary.dhoti : n.includes('shawl') ? vary.shawl
-            : (n.includes('beard') || n.includes('mustache')) ? vary.beard : null;
+          const tint = ['dhoti', 'saree', 'skirt', 'pant'].some((k) => n.includes(k)) ? vary.base
+            : ['shawl', 'kurta', 'blouse'].some((k) => n.includes(k)) ? vary.drape
+            : (n.includes('beard') || n.includes('mustache')) ? vary.beard
+            : n.includes('skin') ? vary.skin : null;
           if (tint) {
             const cp = m.clone();
             cp.color.setRGB(...tint);
@@ -541,8 +559,8 @@ async function main() {
         });
       }
       // Face: billboard features on the head, front (+Z after lookAt).
-      // Skipped for our own sage (modeled face + bone-blink in its Idle).
-      if (c.arch !== 'sage') {
+      // Skipped for own-kit models (modeled faces + bone-blink in Idle).
+      if (!OWN_KIT.has(c.arch)) {
         const face = makeFace(/warrior|king|bhishma|drona/i.test(`${c.arch} ${c.char}`));
         const fy = (c.arch === 'princess' ? 1.9 : 1.62) * c.s;
         face.sprite.scale.set(0.8 * c.s, 0.8 * c.s, 1);

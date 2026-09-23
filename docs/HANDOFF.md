@@ -62,3 +62,7 @@ characters speak the scene's dialogue (TTS), with pause / 0.5× / 1× / 2× paci
 - S12 user rejected robots+stickers outright: built own-kit toon Rishi
   (chars_sage.py, 4.2k tris, Idle+blink) for all sage cast + VARIETY tints;
   closer adi-01 spawn; verified three distinct faced sages in player.
+- S14 full cast kit (chars_kit.py): king/warrior/strongman/princess with
+  Idle+blink, Arjuna->warrior, VARIETY skin slot + 20 rows, OWN_KIT wiring;
+  journey-verified scenes 1-2, zero console errors. NEXT: restage scenes
+  2-12 (adi-02 poles overexposed + center-framed) + env dressing pass.
