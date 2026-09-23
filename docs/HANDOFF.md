@@ -44,3 +44,6 @@ characters speak the scene's dialogue (TTS), with pause / 0.5× / 1× / 2× paci
 - S7 competitor watch (Outerbook/3DStoryteller closest; our moat = roamable 3D +
   paced journey + deterministic pipeline); journey soak test (1→2→3 advance OK,
   dolly shortened 0.38→0.25 after shrine collision); repo: dixit18/storyworld.
+- S8 sky domes (canvas gradient, per-scene moods) after proving OutlineEffect
+  silently eats background materials; per-scene exposure; dolly 0.18/+2.0;
+  speed keys 1/2/3; agent-browser discipline (wait --text/--fn, single batch).
